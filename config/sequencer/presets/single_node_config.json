@@ -182,7 +182,7 @@
   "gateway_config.stateless_tx_validator_config.validate_non_zero_l1_gas_fee": true,
   "gateway_config.stateless_tx_validator_config.validate_non_zero_l2_gas_fee": false,
   "http_server_config.ip": "127.0.0.1",
-  "http_server_config.port": 55002,
+  "http_server_config.port": 8080,
   "l1_provider_config.bootstrap_catch_up_height": 0,
   "l1_provider_config.provider_startup_height": 1,
   "l1_provider_config.startup_sync_sleep_retry_interval": 0.0,

@@ -111,7 +111,7 @@ class ServiceApp(Construct):
 
 
     def _get_config_attr(self, attribute) -> str | int:
-        config_attr = self.node_config.get(attribute).get('value')
+        config_attr = self.node_config.get(attribute)
         assert config_attr is not None, f'Config attribute "{attribute}" is missing.'
 
         return config_attr
@@ -143,7 +143,7 @@ class ServiceApp(Construct):
     ) -> k8s.Probe:
         path = "/monitoring/alive"
         # path = self.node_config['monitoring_path'].get("value") # TODO(IdanS): add monitoring path in node_config
-        port = self.node_config.get('monitoring_endpoint_config.port').get("value")
+        port = self.node_config.get('monitoring_endpoint_config.port')
 
         return k8s.Probe(
             http_get=k8s.HttpGetAction(
