@@ -33,20 +33,34 @@ class SequencerNode(Chart):
 
 def main():
     args = helpers.argument_parser()
-    if args.env == "dev":
-        system_preset = topology.SequencerDev(config=get_dev_config(args.config_file))
-    elif args.env == "prod":
-        raise NotImplementedError("Production environment not supported.")
-        # system_preset = topology.SequencerProd()
-
     app = App(yaml_output_type=YamlOutputType.FOLDER_PER_CHART_FILE_PER_RESOURCE)
 
-    SequencerNode(
-        scope=app,
-        name="sequencer-node",
-        namespace=args.namespace,
-        service_topology=system_preset,
-    )
+    if args.topology == "single":
+        system_preset = topology.SequencerDev(
+            config=get_dev_config("../../config/sequencer/presets/single_node_config.json")
+        )
+        SequencerNode(
+            scope=app,
+            name="sequencer-node",
+            namespace=args.namespace,
+            service_topology=system_preset,
+        )
+    elif args.topology == "distributed":
+        system_presets = [
+            topology.SequencerDev(
+                config=get_dev_config("../../config/sequencer/presets/system_test_presets/consolidated_node/executable_0/config.json")
+            ),
+            topology.SequencerDev(
+                config=get_dev_config("../../config/sequencer/presets/system_test_presets/consolidated_node/executable_1/config.json")
+            )
+        ]
+        for index, system_preset in enumerate(system_presets):
+            SequencerNode(
+                scope=app,
+                name=f"sequencer-node-{index}",
+                namespace=args.namespace,
+                service_topology=system_preset,
+            )
 
     app.synth()
 
