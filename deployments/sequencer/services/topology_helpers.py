@@ -24,7 +24,7 @@ def get_pvc() -> objects.PersistentVolumeClaim:
     )
 
 
-def get_dev_config(config_file_path: str) -> objects.Config:
+def get_dev_config(config_file_path: str = None) -> objects.Config:
     return SequencerDevConfig(
         config_file_path=config_file_path
     )

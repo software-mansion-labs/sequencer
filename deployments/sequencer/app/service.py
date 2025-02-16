@@ -3,6 +3,8 @@ import typing
 
 from constructs import Construct
 from cdk8s import Names
+from mypy.types_utils import AnyType
+
 from imports import k8s
 from imports.k8s import IngressTls
 
@@ -165,13 +167,23 @@ class ServiceApp(Construct):
             timeout_seconds=timeout_seconds,
         )
 
-    def _get_volume_mounts(self) -> typing.List[k8s.VolumeMount]:
+    def _get_components_subset_from_config(self) -> typing.Dict[str, typing.Any]:
+        return {k: v for k, v in self.node_config.items() if k.startswith('components.')}
+
+    def _get_components_requires_pvc(self):
+        components = self._get_components_subset_from_config()
+
+    def _get_config_volume_mounts(self) -> typing.List[k8s.VolumeMount]:
         return [
             k8s.VolumeMount(
                 name=f"{self.node.id}-config",
                 mount_path="/config/sequencer/presets/",
                 read_only=True
-            ),
+            )
+        ]
+
+    def _get_data_volume_mounts(self) -> typing.List[k8s.VolumeMount]:
+        return [
             k8s.VolumeMount(
                 name=f"{self.node.id}-data",
                 mount_path="/data",

@@ -37,21 +37,26 @@ def main():
 
     if args.topology == "single":
         system_preset = topology.SequencerDev(
-            config=get_dev_config("../../config/sequencer/presets/single_node_config.json")
+            # If config_file_path is undefined, defaults to config/sequencer/presets/single_node_config.json
+            config=get_dev_config()
         )
         SequencerNode(
             scope=app,
-            name="sequencer-node",
+            name="sequencer-node-0",
             namespace=args.namespace,
             service_topology=system_preset,
         )
     elif args.topology == "distributed":
         system_presets = [
             topology.SequencerDev(
-                config=get_dev_config("../../config/sequencer/presets/system_test_presets/consolidated_node/executable_0/config.json")
+                config=get_dev_config(
+                    config_file_path="../../config/sequencer/presets/system_test_presets/consolidated_node/executable_0/node_integration_test_config_changes.json"
+                )
             ),
             topology.SequencerDev(
-                config=get_dev_config("../../config/sequencer/presets/system_test_presets/consolidated_node/executable_1/config.json")
+                config=get_dev_config(
+                    config_file_path="../../config/sequencer/presets/system_test_presets/consolidated_node/executable_1/node_integration_test_config_changes.json"
+                )
             )
         ]
         for index, system_preset in enumerate(system_presets):
