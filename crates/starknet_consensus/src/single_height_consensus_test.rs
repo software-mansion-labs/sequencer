@@ -1,7 +1,7 @@
-use futures::channel::{mpsc, oneshot};
+use apollo_protobuf::consensus::{DEFAULT_VALIDATOR_ID, ProposalFin, ProposalInit, Vote};
 use futures::SinkExt;
+use futures::channel::{mpsc, oneshot};
 use lazy_static::lazy_static;
-use papyrus_protobuf::consensus::{ProposalFin, ProposalInit, Vote, DEFAULT_VALIDATOR_ID};
 use starknet_api::block::{BlockHash, BlockNumber};
 use starknet_types_core::felt::Felt;
 use test_case::test_case;
@@ -10,7 +10,7 @@ use super::SingleHeightConsensus;
 use crate::config::TimeoutsConfig;
 use crate::single_height_consensus::{ShcEvent, ShcReturn, ShcTask};
 use crate::state_machine::StateMachineEvent;
-use crate::test_utils::{precommit, prevote, MockTestContext, TestBlock, TestProposalPart};
+use crate::test_utils::{MockTestContext, TestBlock, TestProposalPart, precommit, prevote};
 use crate::types::ValidatorId;
 
 lazy_static! {

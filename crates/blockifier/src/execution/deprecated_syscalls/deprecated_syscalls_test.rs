@@ -10,20 +10,12 @@ use starknet_api::abi::abi_utils::selector_from_name;
 use starknet_api::core::calculate_contract_address;
 use starknet_api::state::StorageKey;
 use starknet_api::test_utils::{
-    CHAIN_ID_FOR_TESTS,
-    CURRENT_BLOCK_NUMBER,
-    CURRENT_BLOCK_NUMBER_FOR_VALIDATE,
-    CURRENT_BLOCK_TIMESTAMP,
-    CURRENT_BLOCK_TIMESTAMP_FOR_VALIDATE,
-    TEST_SEQUENCER_ADDRESS,
+    CHAIN_ID_FOR_TESTS, CURRENT_BLOCK_NUMBER, CURRENT_BLOCK_NUMBER_FOR_VALIDATE,
+    CURRENT_BLOCK_TIMESTAMP, CURRENT_BLOCK_TIMESTAMP_FOR_VALIDATE, TEST_SEQUENCER_ADDRESS,
 };
 use starknet_api::transaction::fields::{Calldata, ContractAddressSalt, Fee, Tip};
 use starknet_api::transaction::{
-    EventContent,
-    EventData,
-    EventKey,
-    TransactionVersion,
-    QUERY_VERSION_BASE,
+    EventContent, EventData, EventKey, QUERY_VERSION_BASE, TransactionVersion,
 };
 use starknet_api::{calldata, felt, nonce, storage_key, tx_hash};
 use starknet_types_core::felt::Felt;
@@ -41,9 +33,7 @@ use crate::state::state_api::StateReader;
 use crate::test_utils::contracts::FeatureContractData;
 use crate::test_utils::initial_test_state::{test_state, test_state_ex};
 use crate::test_utils::{
-    calldata_for_deploy_test,
-    get_const_syscall_resources,
-    trivial_external_entry_point_new,
+    calldata_for_deploy_test, get_const_syscall_resources, trivial_external_entry_point_new,
 };
 use crate::transaction::objects::{CommonAccountFields, CurrentTransactionInfo, TransactionInfo};
 use crate::{check_entry_point_execution_error_for_custom_hint, retdata};

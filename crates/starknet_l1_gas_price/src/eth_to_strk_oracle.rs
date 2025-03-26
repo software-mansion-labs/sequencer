@@ -1,14 +1,14 @@
 use std::collections::{BTreeMap, HashMap};
 
+use apollo_config::converters::{deserialize_optional_map, serialize_optional_map};
+use apollo_config::dumping::{SerializeConfig, ser_param};
+use apollo_config::{ParamPath, ParamPrivacyInput, SerializedParam};
 use async_trait::async_trait;
-use papyrus_config::converters::{deserialize_optional_map, serialize_optional_map};
-use papyrus_config::dumping::{ser_param, SerializeConfig};
-use papyrus_config::{ParamPath, ParamPrivacyInput, SerializedParam};
 use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
 use serde::{Deserialize, Serialize};
 use serde_json;
-use starknet_l1_gas_price_types::errors::EthToStrkOracleClientError;
 use starknet_l1_gas_price_types::EthToStrkOracleClientTrait;
+use starknet_l1_gas_price_types::errors::EthToStrkOracleClientError;
 use tracing::{debug, info};
 use url::Url;
 

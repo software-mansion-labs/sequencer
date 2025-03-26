@@ -3,8 +3,7 @@ use std::time::Duration;
 
 use starknet_infra_utils::test_utils::TestIdentifier;
 use starknet_integration_tests::integration_test_manager::{
-    IntegrationTestManager,
-    DEFAULT_SENDER_ACCOUNT,
+    DEFAULT_SENDER_ACCOUNT, IntegrationTestManager,
 };
 use starknet_integration_tests::integration_test_utils::integration_test_setup;
 use starknet_integration_tests::utils::{ConsensusTxs, N_TXS_IN_FIRST_BLOCK, TPS};

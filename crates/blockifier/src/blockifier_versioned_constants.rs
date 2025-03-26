@@ -3,13 +3,13 @@ use std::io;
 use std::path::Path;
 use std::sync::Arc;
 
+use apollo_config::dumping::{SerializeConfig, ser_param};
+use apollo_config::{ParamPath, ParamPrivacyInput, SerializedParam};
 use cairo_vm::types::builtin_name::BuiltinName;
 use cairo_vm::vm::runners::cairo_runner::ExecutionResources;
 use indexmap::{IndexMap, IndexSet};
 use num_rational::Ratio;
 use num_traits::Inv;
-use papyrus_config::dumping::{ser_param, SerializeConfig};
-use papyrus_config::{ParamPath, ParamPrivacyInput, SerializedParam};
 use semver::Version;
 use serde::de::Error as DeserializationError;
 use serde::{Deserialize, Deserializer, Serialize};
@@ -25,8 +25,8 @@ use thiserror::Error;
 
 use crate::execution::common_hints::ExecutionMode;
 use crate::execution::execution_utils::poseidon_hash_many_cost;
-use crate::execution::syscalls::hint_processor::SyscallUsageMap;
 use crate::execution::syscalls::SyscallSelector;
+use crate::execution::syscalls::hint_processor::SyscallUsageMap;
 use crate::fee::resources::StarknetResources;
 use crate::transaction::transaction_types::TransactionType;
 use crate::utils::get_gas_cost_from_vm_resources;

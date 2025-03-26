@@ -11,13 +11,11 @@
 //! `cargo bench --bench blockifier --features "cairo_native"`.
 
 use blockifier::test_utils::transfers_generator::{
-    RecipientGeneratorType,
-    TransfersGenerator,
-    TransfersGeneratorConfig,
+    RecipientGeneratorType, TransfersGenerator, TransfersGeneratorConfig,
 };
 #[cfg(feature = "cairo_native")]
 use blockifier_test_utils::cairo_versions::{CairoVersion, RunnableCairo1};
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 use starknet_infra_utils::set_global_allocator;
 
 // TODO(Arni): Consider how to run this benchmark both with and without setting the allocator. Maybe

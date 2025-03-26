@@ -21,11 +21,9 @@ pub mod storage;
 pub mod test_utils;
 
 use blockifier::state::stateful_compression::{
-    ALIAS_COUNTER_STORAGE_KEY,
-    MAX_NON_COMPRESSED_CONTRACT_ADDRESS,
-    MIN_VALUE_FOR_ALIAS_ALLOC,
+    ALIAS_COUNTER_STORAGE_KEY, MAX_NON_COMPRESSED_CONTRACT_ADDRESS, MIN_VALUE_FOR_ALIAS_ALLOC,
 };
-use errors::{add_py_exceptions, UndeclaredClassHashError};
+use errors::{UndeclaredClassHashError, add_py_exceptions};
 use py_block_executor::PyBlockExecutor;
 use py_objects::PyExecutionResources;
 use py_validator::PyValidator;
@@ -37,8 +35,7 @@ use crate::py_objects::PyVersionedConstantsOverrides;
 use crate::py_state_diff::PyStateDiff;
 use crate::py_testing_wrappers::{
     estimate_casm_hash_computation_resources_for_testing_list,
-    estimate_casm_hash_computation_resources_for_testing_single,
-    raise_error_for_testing,
+    estimate_casm_hash_computation_resources_for_testing_single, raise_error_for_testing,
 };
 
 #[pymodule]

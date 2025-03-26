@@ -15,18 +15,13 @@ use starknet_types_core::hash::{Poseidon, StarkHash as SNTypsCoreStarkHash};
 use crate::block::{BlockHash, BlockNumber};
 use crate::contract_class::EntryPointType;
 use crate::core::{
-    ClassHash,
-    CompiledClassHash,
-    ContractAddress,
-    EntryPointSelector,
-    GlobalRoot,
-    Nonce,
+    ClassHash, CompiledClassHash, ContractAddress, EntryPointSelector, GlobalRoot, Nonce,
     PatriciaKey,
 };
 use crate::deprecated_contract_class::ContractClass as DeprecatedContractClass;
 use crate::hash::{PoseidonHash, StarkHash};
 use crate::rpc_transaction::EntryPointByType;
-use crate::{impl_from_through_intermediate, StarknetApiError};
+use crate::{StarknetApiError, impl_from_through_intermediate};
 
 pub type DeclaredClasses = IndexMap<ClassHash, SierraContractClass>;
 pub type DeprecatedDeclaredClasses = IndexMap<ClassHash, DeprecatedContractClass>;

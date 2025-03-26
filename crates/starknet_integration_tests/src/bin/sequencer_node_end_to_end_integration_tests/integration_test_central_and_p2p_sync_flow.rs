@@ -3,8 +3,7 @@ use starknet_infra_utils::test_utils::TestIdentifier;
 use starknet_integration_tests::integration_test_manager::IntegrationTestManager;
 use starknet_integration_tests::integration_test_utils::integration_test_setup;
 use starknet_sequencer_node::config::component_execution_config::{
-    ActiveComponentExecutionMode,
-    ReactiveComponentExecutionMode,
+    ActiveComponentExecutionMode, ReactiveComponentExecutionMode,
 };
 use starknet_sequencer_node::config::node_config::SequencerNodeConfig;
 use starknet_state_sync::config::CentralSyncClientConfig;

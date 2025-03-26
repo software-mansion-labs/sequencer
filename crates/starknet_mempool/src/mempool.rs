@@ -5,29 +5,22 @@ use std::time::Instant;
 use starknet_api::block::NonzeroGasPrice;
 use starknet_api::core::{ContractAddress, Nonce};
 use starknet_api::rpc_transaction::{InternalRpcTransaction, InternalRpcTransactionWithoutTxHash};
-use starknet_api::transaction::fields::Tip;
 use starknet_api::transaction::TransactionHash;
+use starknet_api::transaction::fields::Tip;
 use starknet_mempool_types::errors::MempoolError;
 use starknet_mempool_types::mempool_types::{
-    AccountState,
-    AddTransactionArgs,
-    CommitBlockArgs,
-    MempoolResult,
-    MempoolSnapshot,
+    AccountState, AddTransactionArgs, CommitBlockArgs, MempoolResult, MempoolSnapshot,
 };
 use tracing::{debug, info, instrument, trace};
 
 use crate::config::MempoolConfig;
 use crate::metrics::{
-    metric_count_committed_txs,
-    metric_count_expired_txs,
-    metric_count_rejected_txs,
-    metric_set_get_txs_size,
-    MempoolMetricHandle,
+    MempoolMetricHandle, metric_count_committed_txs, metric_count_expired_txs,
+    metric_count_rejected_txs, metric_set_get_txs_size,
 };
 use crate::transaction_pool::TransactionPool;
 use crate::transaction_queue::TransactionQueue;
-use crate::utils::{try_increment_nonce, Clock};
+use crate::utils::{Clock, try_increment_nonce};
 
 #[cfg(test)]
 #[path = "mempool_test.rs"]

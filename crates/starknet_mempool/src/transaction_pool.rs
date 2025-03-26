@@ -1,5 +1,5 @@
 use std::cmp::Ordering;
-use std::collections::{hash_map, BTreeMap, HashMap};
+use std::collections::{BTreeMap, HashMap, hash_map};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 
@@ -11,7 +11,7 @@ use starknet_mempool_types::mempool_types::{AccountState, MempoolResult};
 
 use crate::mempool::TransactionReference;
 use crate::metrics::TRANSACTION_TIME_SPENT_IN_MEMPOOL;
-use crate::utils::{try_increment_nonce, Clock};
+use crate::utils::{Clock, try_increment_nonce};
 
 type HashToTransaction = HashMap<TransactionHash, InternalRpcTransaction>;
 

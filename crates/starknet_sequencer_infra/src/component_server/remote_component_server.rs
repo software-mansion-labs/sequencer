@@ -7,15 +7,15 @@ use hyper::body::to_bytes;
 use hyper::header::CONTENT_TYPE;
 use hyper::service::{make_service_fn, service_fn};
 use hyper::{Body, Request as HyperRequest, Response as HyperResponse, Server, StatusCode};
-use serde::de::DeserializeOwned;
 use serde::Serialize;
+use serde::de::DeserializeOwned;
 use starknet_infra_utils::type_name::short_type_name;
-use tower::limit::ConcurrencyLimitLayer;
 use tower::ServiceBuilder;
+use tower::limit::ConcurrencyLimitLayer;
 use tracing::{debug, error, warn};
 
 use crate::component_client::{ClientError, LocalComponentClient};
-use crate::component_definitions::{ComponentClient, ServerError, APPLICATION_OCTET_STREAM};
+use crate::component_definitions::{APPLICATION_OCTET_STREAM, ComponentClient, ServerError};
 use crate::component_server::ComponentServerStarter;
 use crate::metrics::RemoteServerMetrics;
 use crate::serde_utils::SerdeWrapper;

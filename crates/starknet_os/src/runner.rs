@@ -9,12 +9,10 @@ use crate::errors::StarknetOsError;
 use crate::hint_processor::execution_helper::OsExecutionHelper;
 use crate::hint_processor::panicking_state_reader::PanickingStateReader;
 use crate::hint_processor::snos_hint_processor::{
-    DeprecatedSyscallHintProcessor,
-    SnosHintProcessor,
-    SyscallHintProcessor,
+    DeprecatedSyscallHintProcessor, SnosHintProcessor, SyscallHintProcessor,
 };
 use crate::io::os_input::{CachedStateInput, StarknetOsInput};
-use crate::io::os_output::{get_run_output, StarknetOsRunnerOutput};
+use crate::io::os_output::{StarknetOsRunnerOutput, get_run_output};
 
 pub fn run_os<S: StateReader>(
     compiled_os: &[u8],

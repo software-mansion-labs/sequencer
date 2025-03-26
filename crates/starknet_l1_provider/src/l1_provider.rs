@@ -6,11 +6,7 @@ use starknet_api::executable_transaction::L1HandlerTransaction;
 use starknet_api::transaction::TransactionHash;
 use starknet_l1_provider_types::errors::L1ProviderError;
 use starknet_l1_provider_types::{
-    Event,
-    L1ProviderResult,
-    SessionState,
-    SharedL1ProviderClient,
-    ValidationStatus,
+    Event, L1ProviderResult, SessionState, SharedL1ProviderClient, ValidationStatus,
 };
 use starknet_sequencer_infra::component_definitions::ComponentStarter;
 use starknet_state_sync_types::communication::SharedStateSyncClient;

@@ -3,17 +3,14 @@ mod test;
 
 use std::time::Duration;
 
+use apollo_network::network_manager::{
+    BroadcastTopicClient, BroadcastTopicClientTrait, BroadcastTopicServer, NetworkError,
+};
+use apollo_protobuf::mempool::RpcTransactionBatch;
 use async_trait::async_trait;
+use futures::StreamExt;
 use futures::future::BoxFuture;
 use futures::stream::FuturesUnordered;
-use futures::StreamExt;
-use papyrus_network::network_manager::{
-    BroadcastTopicClient,
-    BroadcastTopicClientTrait,
-    BroadcastTopicServer,
-    NetworkError,
-};
-use papyrus_protobuf::mempool::RpcTransactionBatch;
 use starknet_gateway_types::communication::{GatewayClientError, SharedGatewayClient};
 use starknet_gateway_types::errors::GatewayError;
 use starknet_gateway_types::gateway_types::GatewayInput;

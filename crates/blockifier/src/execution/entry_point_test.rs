@@ -19,7 +19,7 @@ use crate::retdata;
 use crate::state::cached_state::CachedState;
 use crate::test_utils::dict_state_reader::DictStateReader;
 use crate::test_utils::initial_test_state::test_state;
-use crate::test_utils::{trivial_external_entry_point_new, BALANCE};
+use crate::test_utils::{BALANCE, trivial_external_entry_point_new};
 
 #[test]
 fn test_call_info_iteration() {

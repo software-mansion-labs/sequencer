@@ -5,8 +5,7 @@ use std::io::Read;
 use starknet_types_core::felt::Felt;
 
 use crate::hints::class_hash::hinted_class_hash::{
-    compute_cairo_hinted_class_hash,
-    CairoContractDefinition,
+    CairoContractDefinition, compute_cairo_hinted_class_hash,
 };
 
 // The contract and the expected hash are taken from the python side.

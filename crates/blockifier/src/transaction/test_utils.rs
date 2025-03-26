@@ -9,30 +9,19 @@ use starknet_api::core::{ClassHash, ContractAddress, Nonce};
 use starknet_api::execution_resources::{GasAmount, GasVector};
 use starknet_api::test_utils::declare::executable_declare_tx;
 use starknet_api::test_utils::deploy_account::{
-    create_executable_deploy_account_tx_and_update_nonce,
-    DeployAccountTxArgs,
+    DeployAccountTxArgs, create_executable_deploy_account_tx_and_update_nonce,
 };
-use starknet_api::test_utils::invoke::{executable_invoke_tx, InvokeTxArgs};
+use starknet_api::test_utils::invoke::{InvokeTxArgs, executable_invoke_tx};
 use starknet_api::test_utils::{
+    DEFAULT_L1_DATA_GAS_MAX_AMOUNT, DEFAULT_L1_GAS_AMOUNT, DEFAULT_L2_GAS_MAX_AMOUNT,
+    DEFAULT_STRK_L1_DATA_GAS_PRICE, DEFAULT_STRK_L1_GAS_PRICE, DEFAULT_STRK_L2_GAS_PRICE, MAX_FEE,
     NonceManager,
-    DEFAULT_L1_DATA_GAS_MAX_AMOUNT,
-    DEFAULT_L1_GAS_AMOUNT,
-    DEFAULT_L2_GAS_MAX_AMOUNT,
-    DEFAULT_STRK_L1_DATA_GAS_PRICE,
-    DEFAULT_STRK_L1_GAS_PRICE,
-    DEFAULT_STRK_L2_GAS_PRICE,
-    MAX_FEE,
 };
 use starknet_api::transaction::fields::{
-    AllResourceBounds,
-    ContractAddressSalt,
-    Fee,
-    GasVectorComputationMode,
-    ResourceBounds,
-    TransactionSignature,
-    ValidResourceBounds,
+    AllResourceBounds, ContractAddressSalt, Fee, GasVectorComputationMode, ResourceBounds,
+    TransactionSignature, ValidResourceBounds,
 };
-use starknet_api::transaction::{constants, TransactionVersion};
+use starknet_api::transaction::{TransactionVersion, constants};
 use starknet_api::{calldata, declare_tx_args, deploy_account_tx_args, felt, invoke_tx_args};
 use starknet_types_core::felt::Felt;
 use strum::IntoEnumIterator;
@@ -41,10 +30,10 @@ use crate::blockifier_versioned_constants::VersionedConstants;
 use crate::context::{BlockContext, ChainInfo};
 use crate::state::cached_state::CachedState;
 use crate::state::state_api::State;
+use crate::test_utils::BALANCE;
 use crate::test_utils::contracts::FeatureContractTrait;
 use crate::test_utils::dict_state_reader::DictStateReader;
 use crate::test_utils::initial_test_state::test_state;
-use crate::test_utils::BALANCE;
 use crate::transaction::account_transaction::{AccountTransaction, ExecutionFlags};
 use crate::transaction::objects::{TransactionExecutionInfo, TransactionExecutionResult};
 use crate::transaction::transaction_types::TransactionType;

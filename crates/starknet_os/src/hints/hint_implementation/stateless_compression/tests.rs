@@ -9,24 +9,10 @@ use rstest::rstest;
 use starknet_types_core::felt::Felt;
 
 use super::utils::{
-    compress,
-    felt_from_bits_le,
-    get_bucket_offsets,
-    get_n_elms_per_felt,
-    pack_usize_in_felts,
-    BitLength,
-    BitsArray,
-    BucketElement,
-    BucketElement125,
-    BucketElement31,
-    BucketElement62,
-    BucketElementTrait,
-    Buckets,
-    CompressionSet,
-    COMPRESSION_VERSION,
-    HEADER_ELM_BOUND,
-    N_UNIQUE_BUCKETS,
-    TOTAL_N_BUCKETS,
+    BitLength, BitsArray, BucketElement, BucketElement31, BucketElement62, BucketElement125,
+    BucketElementTrait, Buckets, COMPRESSION_VERSION, CompressionSet, HEADER_ELM_BOUND,
+    N_UNIQUE_BUCKETS, TOTAL_N_BUCKETS, compress, felt_from_bits_le, get_bucket_offsets,
+    get_n_elms_per_felt, pack_usize_in_felts,
 };
 use crate::hints::error::OsHintError;
 

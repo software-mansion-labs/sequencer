@@ -1,8 +1,7 @@
 use std::collections::HashMap;
 
 use blockifier::execution::syscalls::hint_processor::{
-    valid_resource_bounds_as_felts,
-    ResourceAsFelts,
+    ResourceAsFelts, valid_resource_bounds_as_felts,
 };
 use cairo_vm::types::relocatable::Relocatable;
 use cairo_vm::vm::vm_core::VirtualMachine;
@@ -11,7 +10,7 @@ use starknet_types_core::felt::Felt;
 
 use crate::hints::error::{OsHintError, OsHintResult};
 use crate::hints::vars::CairoStruct;
-use crate::vm_utils::{insert_values_to_fields, CairoSized, IdentifierGetter, LoadCairoObject};
+use crate::vm_utils::{CairoSized, IdentifierGetter, LoadCairoObject, insert_values_to_fields};
 
 impl<IG: IdentifierGetter> LoadCairoObject<IG> for ResourceAsFelts {
     fn load_into(

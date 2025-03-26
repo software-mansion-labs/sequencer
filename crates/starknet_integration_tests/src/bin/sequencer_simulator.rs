@@ -7,14 +7,11 @@ use starknet_integration_tests::integration_test_manager::{HTTP_PORT_ARG, MONITO
 use starknet_integration_tests::integration_test_utils::set_panic_hook;
 use starknet_integration_tests::sequencer_simulator_utils::SequencerSimulator;
 use starknet_integration_tests::utils::{
+    ACCOUNT_ID_0, BootstrapTxs, ConsensusTxs, N_TXS_IN_FIRST_BLOCK,
     create_integration_test_tx_generator,
-    BootstrapTxs,
-    ConsensusTxs,
-    ACCOUNT_ID_0,
-    N_TXS_IN_FIRST_BLOCK,
 };
 use starknet_sequencer_infra::trace_util::configure_tracing;
-use tokio::time::{sleep, Duration};
+use tokio::time::{Duration, sleep};
 use tracing::info;
 
 fn read_ports_from_file(path: &str) -> (u16, u16) {

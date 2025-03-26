@@ -1,15 +1,15 @@
 use std::process::exit;
 
-use papyrus_config::presentation::get_config_presentation;
-use papyrus_config::validators::config_validate;
-use papyrus_config::ConfigError;
+use apollo_config::ConfigError;
+use apollo_config::presentation::get_config_presentation;
+use apollo_config::validators::config_validate;
 use tracing::{error, info};
 
-use crate::clients::{create_node_clients, SequencerNodeClients};
+use crate::clients::{SequencerNodeClients, create_node_clients};
 use crate::communication::create_node_channels;
 use crate::components::create_node_components;
 use crate::config::node_config::SequencerNodeConfig;
-use crate::servers::{create_node_servers, SequencerNodeServers};
+use crate::servers::{SequencerNodeServers, create_node_servers};
 
 pub async fn create_node_modules(
     config: &SequencerNodeConfig,

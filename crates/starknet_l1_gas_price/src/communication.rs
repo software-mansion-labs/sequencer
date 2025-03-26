@@ -2,13 +2,10 @@ use async_trait::async_trait;
 use starknet_l1_gas_price_types::{L1GasPriceRequest, L1GasPriceResponse};
 use starknet_sequencer_infra::component_client::{LocalComponentClient, RemoteComponentClient};
 use starknet_sequencer_infra::component_definitions::{
-    ComponentRequestAndResponseSender,
-    ComponentRequestHandler,
+    ComponentRequestAndResponseSender, ComponentRequestHandler,
 };
 use starknet_sequencer_infra::component_server::{
-    LocalComponentServer,
-    RemoteComponentServer,
-    WrapperServer,
+    LocalComponentServer, RemoteComponentServer, WrapperServer,
 };
 use tracing::instrument;
 

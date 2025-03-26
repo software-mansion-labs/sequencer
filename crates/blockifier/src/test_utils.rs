@@ -22,20 +22,12 @@ use starknet_api::execution_resources::{GasAmount, GasVector};
 use starknet_api::hash::StarkHash;
 use starknet_api::state::StorageKey;
 use starknet_api::test_utils::{
-    DEFAULT_L1_DATA_GAS_MAX_AMOUNT,
-    DEFAULT_L1_GAS_AMOUNT,
-    DEFAULT_L2_GAS_MAX_AMOUNT,
-    DEFAULT_STRK_L1_DATA_GAS_PRICE,
-    DEFAULT_STRK_L1_GAS_PRICE,
-    DEFAULT_STRK_L2_GAS_PRICE,
-    MAX_FEE,
+    DEFAULT_L1_DATA_GAS_MAX_AMOUNT, DEFAULT_L1_GAS_AMOUNT, DEFAULT_L2_GAS_MAX_AMOUNT,
+    DEFAULT_STRK_L1_DATA_GAS_PRICE, DEFAULT_STRK_L1_GAS_PRICE, DEFAULT_STRK_L2_GAS_PRICE, MAX_FEE,
     TEST_SEQUENCER_ADDRESS,
 };
 use starknet_api::transaction::fields::{
-    Calldata,
-    ContractAddressSalt,
-    Fee,
-    GasVectorComputationMode,
+    Calldata, ContractAddressSalt, Fee, GasVectorComputationMode,
 };
 use starknet_api::{contract_address, felt};
 use starknet_types_core::felt::Felt;
@@ -47,8 +39,8 @@ use crate::blockifier_versioned_constants::VersionedConstants;
 use crate::execution::call_info::ExecutionSummary;
 use crate::execution::contract_class::TrackedResource;
 use crate::execution::entry_point::CallEntryPoint;
-use crate::execution::syscalls::hint_processor::{SyscallUsage, SyscallUsageMap};
 use crate::execution::syscalls::SyscallSelector;
+use crate::execution::syscalls::hint_processor::{SyscallUsage, SyscallUsageMap};
 use crate::fee::resources::{StarknetResources, StateResources};
 use crate::transaction::transaction_types::TransactionType;
 use crate::utils::{const_max, u64_from_usize};

@@ -1,6 +1,6 @@
 use std::path::PathBuf;
 
-use glob::{glob, Paths};
+use glob::{Paths, glob};
 use pretty_assertions::assert_eq;
 use starknet_api::block::StarknetVersion;
 use starknet_infra_utils::compile_time_cargo_manifest_dir;

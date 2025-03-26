@@ -4,12 +4,8 @@ use starknet_api::state::SierraContractClass;
 use starknet_sierra_multicompile_types::{RawClass, RawExecutableClass};
 
 use crate::class_storage::{
+    ClassHashStorage, ClassHashStorageConfig, ClassStorage, FsClassStorage, FsClassStorageError,
     create_tmp_dir,
-    ClassHashStorage,
-    ClassHashStorageConfig,
-    ClassStorage,
-    FsClassStorage,
-    FsClassStorageError,
 };
 
 // TODO(Elin): consider creating an empty Casm instead of vec (doesn't implement default).

@@ -14,33 +14,22 @@ use std::collections::hash_map::Entry;
 use std::collections::{HashMap, VecDeque};
 use std::time::Duration;
 
+use apollo_protobuf::consensus::{ProposalFin, ProposalInit, Vote, VoteType};
 #[cfg(test)]
 use enum_as_inner::EnumAsInner;
 use futures::channel::{mpsc, oneshot};
-use papyrus_protobuf::consensus::{ProposalFin, ProposalInit, Vote, VoteType};
 use starknet_api::block::BlockNumber;
 use tracing::{debug, info, instrument, trace, warn};
 
 use crate::config::TimeoutsConfig;
 use crate::metrics::{
-    TimeoutReason,
-    CONSENSUS_BUILD_PROPOSAL_FAILED,
-    CONSENSUS_BUILD_PROPOSAL_TOTAL,
-    CONSENSUS_PROPOSALS_INVALID,
-    CONSENSUS_PROPOSALS_VALIDATED,
-    CONSENSUS_PROPOSALS_VALID_INIT,
-    CONSENSUS_REPROPOSALS,
-    CONSENSUS_TIMEOUTS,
-    LABEL_NAME_TIMEOUT_REASON,
+    CONSENSUS_BUILD_PROPOSAL_FAILED, CONSENSUS_BUILD_PROPOSAL_TOTAL, CONSENSUS_PROPOSALS_INVALID,
+    CONSENSUS_PROPOSALS_VALID_INIT, CONSENSUS_PROPOSALS_VALIDATED, CONSENSUS_REPROPOSALS,
+    CONSENSUS_TIMEOUTS, LABEL_NAME_TIMEOUT_REASON, TimeoutReason,
 };
 use crate::state_machine::{StateMachine, StateMachineEvent};
 use crate::types::{
-    ConsensusContext,
-    ConsensusError,
-    Decision,
-    ProposalCommitment,
-    Round,
-    ValidatorId,
+    ConsensusContext, ConsensusError, Decision, ProposalCommitment, Round, ValidatorId,
 };
 
 /// The SHC can either update the manager of a decision or return tasks that should be run without

@@ -5,9 +5,7 @@ use ethnum::U256;
 use serde_json::json;
 use starknet_api::core::{ClassHash, ContractAddress, Nonce};
 use starknet_committer::block_committer::input::{
-    StarknetStorageKey,
-    StarknetStorageValue,
-    StateDiff,
+    StarknetStorageKey, StarknetStorageValue, StateDiff,
 };
 use starknet_committer::forest::filled_forest::FilledForest;
 use starknet_committer::hash_function::hash::TreeHashFunctionImpl;
@@ -18,11 +16,7 @@ use starknet_patricia::hash::hash_trait::HashOutput;
 use starknet_patricia::patricia_merkle_tree::external_test_utils::single_tree_flow_test;
 use starknet_patricia::patricia_merkle_tree::filled_tree::node::FilledNode;
 use starknet_patricia::patricia_merkle_tree::node_data::inner_node::{
-    BinaryData,
-    EdgeData,
-    EdgePathLength,
-    NodeData,
-    PathToBottom,
+    BinaryData, EdgeData, EdgePathLength, NodeData, PathToBottom,
 };
 use starknet_patricia::patricia_merkle_tree::types::SubTreeHeight;
 use starknet_patricia_storage::db_object::DBObject;

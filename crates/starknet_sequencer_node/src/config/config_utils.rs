@@ -2,13 +2,10 @@ use std::fs::File;
 use std::io::Write;
 use std::path::PathBuf;
 
-use papyrus_config::dumping::{
-    combine_config_map_and_pointers,
-    ConfigPointers,
-    Pointers,
-    SerializeConfig,
+use apollo_config::dumping::{
+    ConfigPointers, Pointers, SerializeConfig, combine_config_map_and_pointers,
 };
-use serde_json::{to_value, Map, Value};
+use serde_json::{Map, Value, to_value};
 use starknet_monitoring_endpoint::config::MonitoringEndpointConfig;
 use tracing::{error, info};
 use validator::ValidationError;
@@ -16,10 +13,7 @@ use validator::ValidationError;
 use crate::config::component_config::ComponentConfig;
 use crate::config::definitions::ConfigPointersMap;
 use crate::config::node_config::{
-    SequencerNodeConfig,
-    CONFIG_NON_POINTERS_WHITELIST,
-    CONFIG_POINTERS,
-    POINTER_TARGET_VALUE,
+    CONFIG_NON_POINTERS_WHITELIST, CONFIG_POINTERS, POINTER_TARGET_VALUE, SequencerNodeConfig,
 };
 use crate::utils::load_and_validate_config;
 

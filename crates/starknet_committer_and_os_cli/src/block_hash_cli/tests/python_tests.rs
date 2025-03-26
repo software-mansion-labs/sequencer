@@ -1,14 +1,11 @@
 use starknet_api::block_hash::block_hash_calculator::{
-    TransactionHashingData,
-    TransactionOutputForHash,
+    TransactionHashingData, TransactionOutputForHash,
 };
 use starknet_api::state::ThinStateDiff;
 use starknet_api::transaction::TransactionExecutionStatus;
 
 use crate::block_hash_cli::tests::objects::{
-    get_thin_state_diff,
-    get_transaction_output_for_hash,
-    get_tx_data,
+    get_thin_state_diff, get_transaction_output_for_hash, get_tx_data,
 };
 use crate::shared_utils::types::{PythonTestError, PythonTestResult, PythonTestRunner};
 

@@ -4,8 +4,7 @@ use indexmap::IndexMap;
 use serde::Serialize;
 use starknet_sequencer_node::config::component_config::ComponentConfig;
 use starknet_sequencer_node::config::component_execution_config::{
-    ActiveComponentExecutionConfig,
-    ReactiveComponentExecutionConfig,
+    ActiveComponentExecutionConfig, ReactiveComponentExecutionConfig,
 };
 use strum::{Display, IntoEnumIterator};
 use strum_macros::{AsRefStr, EnumIter};

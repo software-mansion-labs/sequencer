@@ -3,36 +3,30 @@ use std::net::SocketAddr;
 use std::sync::Arc;
 
 use alloy::node_bindings::AnvilInstance;
+use apollo_network::gossipsub_impl::Topic;
+use apollo_network::network_manager::BroadcastTopicChannels;
+use apollo_network::network_manager::test_utils::{
+    create_connected_network_configs, network_config_into_broadcast_channels,
+};
+use apollo_protobuf::consensus::{HeightAndRound, ProposalPart, StreamMessage, StreamMessageBody};
+use apollo_storage::StorageConfig;
 use blockifier::context::ChainInfo;
 use futures::StreamExt;
 use mempool_test_utils::starknet_api_test_utils::{
-    AccountTransactionGenerator,
-    MultiAccountTransactionGenerator,
+    AccountTransactionGenerator, MultiAccountTransactionGenerator,
 };
 use papyrus_base_layer::ethereum_base_layer_contract::EthereumBaseLayerConfig;
 use papyrus_base_layer::test_utils::{
-    ethereum_base_layer_config_for_anvil,
+    StarknetL1Contract, ethereum_base_layer_config_for_anvil,
     spawn_anvil_and_deploy_starknet_l1_contract,
-    StarknetL1Contract,
 };
-use papyrus_network::gossipsub_impl::Topic;
-use papyrus_network::network_manager::test_utils::{
-    create_connected_network_configs,
-    network_config_into_broadcast_channels,
-};
-use papyrus_network::network_manager::BroadcastTopicChannels;
-use papyrus_protobuf::consensus::{HeightAndRound, ProposalPart, StreamMessage, StreamMessageBody};
-use papyrus_storage::StorageConfig;
 use starknet_api::block::BlockNumber;
 use starknet_api::consensus_transaction::ConsensusTransaction;
 use starknet_api::core::{ChainId, ContractAddress};
 use starknet_api::execution_resources::GasAmount;
 use starknet_api::rpc_transaction::RpcTransaction;
 use starknet_api::transaction::{
-    L1HandlerTransaction,
-    TransactionHash,
-    TransactionHasher,
-    TransactionVersion,
+    L1HandlerTransaction, TransactionHash, TransactionHasher, TransactionVersion,
 };
 use starknet_consensus_manager::config::ConsensusManagerConfig;
 use starknet_gateway_types::errors::GatewaySpecError;
@@ -56,15 +50,9 @@ use url::Url;
 
 use crate::state_reader::StorageTestSetup;
 use crate::utils::{
-    create_consensus_manager_configs_from_network_configs,
-    create_mempool_p2p_configs,
-    create_node_config,
-    create_state_sync_configs,
-    send_message_to_l2,
-    set_validator_id,
-    spawn_local_eth_to_strk_oracle,
-    spawn_local_success_recorder,
-    AccumulatedTransactions,
+    AccumulatedTransactions, create_consensus_manager_configs_from_network_configs,
+    create_mempool_p2p_configs, create_node_config, create_state_sync_configs, send_message_to_l2,
+    set_validator_id, spawn_local_eth_to_strk_oracle, spawn_local_success_recorder,
 };
 
 const SEQUENCER_0: usize = 0;
@@ -348,7 +336,7 @@ impl _TxCollector {
         while let Some((Ok(message), _)) = broadcasted_messages_receiver.next().await {
             messages_cache.insert(message.message_id, message.clone());
 
-            if message.message == papyrus_protobuf::consensus::StreamMessageBody::Fin {
+            if message.message == apollo_protobuf::consensus::StreamMessageBody::Fin {
                 last_message_id = message.message_id;
             }
             // Check that we got the Fin message and all previous messages.

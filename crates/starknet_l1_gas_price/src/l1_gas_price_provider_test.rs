@@ -3,9 +3,7 @@ use starknet_api::block::BlockTimestamp;
 use starknet_l1_gas_price_types::PriceInfo;
 
 use crate::l1_gas_price_provider::{
-    L1GasPriceProvider,
-    L1GasPriceProviderConfig,
-    L1GasPriceProviderError,
+    L1GasPriceProvider, L1GasPriceProviderConfig, L1GasPriceProviderError,
 };
 
 // Make a provider with five samples. Timestamps are 2 seconds apart, starting from 0.

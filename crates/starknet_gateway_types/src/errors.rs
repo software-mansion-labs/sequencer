@@ -1,28 +1,18 @@
-use enum_assoc::Assoc;
-use papyrus_network_types::network_types::BroadcastedMessageMetadata;
-use papyrus_rpc::error::{
-    unexpected_error,
+use apollo_network_types::network_types::BroadcastedMessageMetadata;
+use apollo_rpc::error::{
+    CLASS_ALREADY_DECLARED, CLASS_HASH_NOT_FOUND, COMPILATION_FAILED, COMPILED_CLASS_HASH_MISMATCH,
+    CONTRACT_CLASS_SIZE_IS_TOO_LARGE, DUPLICATE_TX, INSUFFICIENT_ACCOUNT_BALANCE,
+    INSUFFICIENT_MAX_FEE, INVALID_TRANSACTION_NONCE, JsonRpcError, NON_ACCOUNT,
+    UNSUPPORTED_CONTRACT_CLASS_VERSION, UNSUPPORTED_TX_VERSION, unexpected_error,
     validation_failure,
-    JsonRpcError,
-    CLASS_ALREADY_DECLARED,
-    CLASS_HASH_NOT_FOUND,
-    COMPILATION_FAILED,
-    COMPILED_CLASS_HASH_MISMATCH,
-    CONTRACT_CLASS_SIZE_IS_TOO_LARGE,
-    DUPLICATE_TX,
-    INSUFFICIENT_ACCOUNT_BALANCE,
-    INSUFFICIENT_MAX_FEE,
-    INVALID_TRANSACTION_NONCE,
-    NON_ACCOUNT,
-    UNSUPPORTED_CONTRACT_CLASS_VERSION,
-    UNSUPPORTED_TX_VERSION,
 };
+use enum_assoc::Assoc;
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
 /// Error returned by the gateway, adhering to the Starknet RPC error format.
 // To get JsonRpcError from GatewaySpecError, use `into_rpc` method.
-// TODO(yair): papyrus_rpc has a test that the add_tx functions return the correct error. Make sure
+// TODO(yair): apollo_rpc has a test that the add_tx functions return the correct error. Make sure
 // it is tested when we have a single gateway.
 #[derive(Debug, Clone, Eq, PartialEq, Assoc, Error, Serialize, Deserialize)]
 #[func(pub fn into_rpc(self) -> JsonRpcError<String>)]

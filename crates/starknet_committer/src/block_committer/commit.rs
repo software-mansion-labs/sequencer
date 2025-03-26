@@ -7,11 +7,7 @@ use tracing::{info, warn};
 
 use crate::block_committer::errors::BlockCommitmentError;
 use crate::block_committer::input::{
-    contract_address_into_node_index,
-    Config,
-    ConfigImpl,
-    Input,
-    StateDiff,
+    Config, ConfigImpl, Input, StateDiff, contract_address_into_node_index,
 };
 use crate::forest::filled_forest::FilledForest;
 use crate::forest::original_skeleton_forest::{ForestSortedIndices, OriginalSkeletonForest};

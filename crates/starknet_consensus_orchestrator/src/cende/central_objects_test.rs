@@ -3,12 +3,7 @@ use std::sync::Arc;
 use std::vec;
 
 use blockifier::execution::call_info::{
-    CallExecution,
-    CallInfo,
-    MessageToL1,
-    OrderedEvent,
-    OrderedL2ToL1Message,
-    Retdata,
+    CallExecution, CallInfo, MessageToL1, OrderedEvent, OrderedL2ToL1Message, Retdata,
     StorageAccessTracker,
 };
 use blockifier::execution::contract_class::TrackedResource;
@@ -16,27 +11,19 @@ use blockifier::execution::entry_point::{CallEntryPoint, CallType};
 use blockifier::fee::fee_checks::FeeCheckError;
 use blockifier::fee::receipt::TransactionReceipt;
 use blockifier::fee::resources::{
-    ArchivalDataResources,
-    ComputationResources,
-    MessageResources,
-    StarknetResources,
-    StateResources,
-    TransactionResources,
+    ArchivalDataResources, ComputationResources, MessageResources, StarknetResources,
+    StateResources, TransactionResources,
 };
 use blockifier::state::cached_state::{
-    CommitmentStateDiff,
-    StateChangesCount,
-    StateChangesCountForFee,
+    CommitmentStateDiff, StateChangesCount, StateChangesCountForFee,
 };
 use blockifier::transaction::objects::{RevertError, TransactionExecutionInfo};
 use cairo_lang_casm::hints::{CoreHint, CoreHintBase, Hint};
 use cairo_lang_casm::operand::{CellRef, Register};
-use cairo_lang_starknet_classes::casm_contract_class::{
-    CasmContractClass,
-    CasmContractEntryPoint,
-    CasmContractEntryPoints,
-};
 use cairo_lang_starknet_classes::NestedIntList;
+use cairo_lang_starknet_classes::casm_contract_class::{
+    CasmContractClass, CasmContractEntryPoint, CasmContractEntryPoints,
+};
 use cairo_lang_utils::bigint::BigUintAsHex;
 use cairo_vm::types::builtin_name::BuiltinName;
 use cairo_vm::vm::runners::cairo_runner::ExecutionResources;
@@ -47,15 +34,8 @@ use rstest::rstest;
 use serde::Serialize;
 use shared_execution_objects::central_objects::CentralTransactionExecutionInfo;
 use starknet_api::block::{
-    BlockHash,
-    BlockInfo,
-    BlockNumber,
-    BlockTimestamp,
-    GasPrice,
-    GasPriceVector,
-    GasPrices,
-    NonzeroGasPrice,
-    StarknetVersion,
+    BlockHash, BlockInfo, BlockNumber, BlockTimestamp, GasPrice, GasPriceVector, GasPrices,
+    NonzeroGasPrice, StarknetVersion,
 };
 use starknet_api::consensus_transaction::InternalConsensusTransaction;
 use starknet_api::contract_class::{ContractClass, EntryPointType, SierraVersion};
@@ -64,42 +44,20 @@ use starknet_api::data_availability::DataAvailabilityMode;
 use starknet_api::executable_transaction::L1HandlerTransaction;
 use starknet_api::execution_resources::{GasAmount, GasVector};
 use starknet_api::rpc_transaction::{
-    EntryPointByType,
-    InternalRpcDeclareTransactionV3,
-    InternalRpcDeployAccountTransaction,
-    InternalRpcTransaction,
-    InternalRpcTransactionWithoutTxHash,
-    RpcDeployAccountTransaction,
-    RpcDeployAccountTransactionV3,
-    RpcInvokeTransaction,
-    RpcInvokeTransactionV3,
+    EntryPointByType, InternalRpcDeclareTransactionV3, InternalRpcDeployAccountTransaction,
+    InternalRpcTransaction, InternalRpcTransactionWithoutTxHash, RpcDeployAccountTransaction,
+    RpcDeployAccountTransactionV3, RpcInvokeTransaction, RpcInvokeTransactionV3,
 };
 use starknet_api::state::{
-    EntryPoint,
-    FunctionIndex,
-    SierraContractClass,
-    StorageKey,
-    ThinStateDiff,
+    EntryPoint, FunctionIndex, SierraContractClass, StorageKey, ThinStateDiff,
 };
 use starknet_api::test_utils::read_json_file;
 use starknet_api::transaction::fields::{
-    AccountDeploymentData,
-    AllResourceBounds,
-    Calldata,
-    ContractAddressSalt,
-    Fee,
-    PaymasterData,
-    ResourceBounds,
-    Tip,
-    TransactionSignature,
+    AccountDeploymentData, AllResourceBounds, Calldata, ContractAddressSalt, Fee, PaymasterData,
+    ResourceBounds, Tip, TransactionSignature,
 };
 use starknet_api::transaction::{
-    EventContent,
-    EventData,
-    EventKey,
-    L2ToL1Payload,
-    TransactionHash,
-    TransactionVersion,
+    EventContent, EventData, EventKey, L2ToL1Payload, TransactionHash, TransactionVersion,
 };
 use starknet_api::{contract_address, felt, nonce, storage_key};
 use starknet_class_manager_types::MockClassManagerClient;
@@ -107,16 +65,9 @@ use starknet_infra_utils::test_utils::assert_json_eq;
 use starknet_types_core::felt::Felt;
 
 use super::{
-    CentralBouncerWeights,
-    CentralCompressedStateDiff,
-    CentralDeclareTransaction,
-    CentralDeployAccountTransaction,
-    CentralFeeMarketInfo,
-    CentralInvokeTransaction,
-    CentralSierraContractClass,
-    CentralStateDiff,
-    CentralTransaction,
-    CentralTransactionWritten,
+    CentralBouncerWeights, CentralCompressedStateDiff, CentralDeclareTransaction,
+    CentralDeployAccountTransaction, CentralFeeMarketInfo, CentralInvokeTransaction,
+    CentralSierraContractClass, CentralStateDiff, CentralTransaction, CentralTransactionWritten,
 };
 use crate::cende::central_objects::CentralCasmContractClass;
 use crate::cende::{AerospikeBlob, BlobParameters};

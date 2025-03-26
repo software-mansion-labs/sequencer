@@ -1,5 +1,12 @@
 use std::collections::HashMap;
 
+use apollo_storage::body::BodyStorageWriter;
+use apollo_storage::class::ClassStorageWriter;
+use apollo_storage::compiled_class::CasmStorageWriter;
+use apollo_storage::header::HeaderStorageWriter;
+use apollo_storage::state::StateStorageWriter;
+use apollo_storage::test_utils::TestStorageBuilder;
+use apollo_storage::{StorageConfig, StorageScope, StorageWriter};
 use assert_matches::assert_matches;
 use blockifier::blockifier_versioned_constants::VersionedConstants;
 use blockifier::context::ChainInfo;
@@ -8,25 +15,11 @@ use blockifier_test_utils::contracts::FeatureContract;
 use cairo_lang_starknet_classes::casm_contract_class::CasmContractClass;
 use indexmap::IndexMap;
 use mempool_test_utils::starknet_api_test_utils::{
-    AccountTransactionGenerator,
-    Contract,
-    VALID_ACCOUNT_BALANCE,
+    AccountTransactionGenerator, Contract, VALID_ACCOUNT_BALANCE,
 };
-use papyrus_storage::body::BodyStorageWriter;
-use papyrus_storage::class::ClassStorageWriter;
-use papyrus_storage::compiled_class::CasmStorageWriter;
-use papyrus_storage::header::HeaderStorageWriter;
-use papyrus_storage::state::StateStorageWriter;
-use papyrus_storage::test_utils::TestStorageBuilder;
-use papyrus_storage::{StorageConfig, StorageScope, StorageWriter};
 use starknet_api::abi::abi_utils::get_fee_token_var_address;
 use starknet_api::block::{
-    BlockBody,
-    BlockHeader,
-    BlockHeaderWithoutHash,
-    BlockNumber,
-    BlockTimestamp,
-    FeeType,
+    BlockBody, BlockHeader, BlockHeaderWithoutHash, BlockNumber, BlockTimestamp, FeeType,
     GasPricePerToken,
 };
 use starknet_api::contract_class::{ContractClass, SierraVersion};
@@ -34,9 +27,7 @@ use starknet_api::core::{ClassHash, ContractAddress, Nonce, SequencerContractAdd
 use starknet_api::deprecated_contract_class::ContractClass as DeprecatedContractClass;
 use starknet_api::state::{SierraContractClass, StorageKey, ThinStateDiff};
 use starknet_api::test_utils::{
-    CURRENT_BLOCK_TIMESTAMP,
-    DEFAULT_ETH_L1_GAS_PRICE,
-    DEFAULT_STRK_L1_GAS_PRICE,
+    CURRENT_BLOCK_TIMESTAMP, DEFAULT_ETH_L1_GAS_PRICE, DEFAULT_STRK_L1_GAS_PRICE,
     TEST_SEQUENCER_ADDRESS,
 };
 use starknet_api::{contract_address, felt};
@@ -249,7 +240,7 @@ fn initialize_papyrus_test_state(
 ) {
     let state_diff = prepare_state_diff(chain_info, test_defined_accounts, &preset_test_contracts);
 
-    write_state_to_papyrus_storage(storage_writer, state_diff, classes)
+    write_state_to_apollo_storage(storage_writer, state_diff, classes)
 }
 
 fn prepare_state_diff(
@@ -313,7 +304,7 @@ fn prepare_contract_classes(
     (cairo0_contract_classes.into_iter().collect(), cairo1_contract_classes.into_iter().collect())
 }
 
-fn write_state_to_papyrus_storage(
+fn write_state_to_apollo_storage(
     storage_writer: &mut StorageWriter,
     state_diff: ThinStateDiff,
     classes: &TestClasses,

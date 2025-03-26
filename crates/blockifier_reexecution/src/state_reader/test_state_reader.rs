@@ -16,43 +16,32 @@ use blockifier::transaction::transaction_execution::Transaction as BlockifierTra
 use serde::Serialize;
 use serde_json::{json, to_value};
 use starknet_api::block::{
-    BlockHash,
-    BlockHashAndNumber,
-    BlockInfo,
-    BlockNumber,
-    GasPricePerToken,
-    StarknetVersion,
+    BlockHash, BlockHashAndNumber, BlockInfo, BlockNumber, GasPricePerToken, StarknetVersion,
 };
 use starknet_api::core::{ChainId, ClassHash, CompiledClassHash, ContractAddress, Nonce};
 use starknet_api::state::StorageKey;
 use starknet_api::transaction::{Transaction, TransactionHash};
 use starknet_core::types::ContractClass as StarknetContractClass;
 use starknet_gateway::config::RpcStateReaderConfig;
-use starknet_gateway::errors::{serde_err_to_state_err, RPCStateReaderError};
+use starknet_gateway::errors::{RPCStateReaderError, serde_err_to_state_err};
 use starknet_gateway::rpc_objects::{BlockHeader, BlockId, GetBlockWithTxHashesParams};
 use starknet_gateway::rpc_state_reader::RpcStateReader;
 use starknet_types_core::felt::Felt;
 
 use crate::retry_request;
 use crate::state_reader::compile::{
-    legacy_to_contract_class_v0,
-    sierra_to_versioned_contract_class_v1,
+    legacy_to_contract_class_v0, sierra_to_versioned_contract_class_v1,
 };
 use crate::state_reader::errors::ReexecutionResult;
 use crate::state_reader::offline_state_reader::SerializableDataNextBlock;
 use crate::state_reader::reexecution_state_reader::{
-    ConsecutiveReexecutionStateReaders,
-    ReexecutionStateReader,
+    ConsecutiveReexecutionStateReaders, ReexecutionStateReader,
 };
 use crate::state_reader::serde_utils::{
-    deserialize_transaction_json_to_starknet_api_tx,
-    hashmap_from_raw,
-    nested_hashmap_from_raw,
+    deserialize_transaction_json_to_starknet_api_tx, hashmap_from_raw, nested_hashmap_from_raw,
 };
 use crate::state_reader::utils::{
-    disjoint_hashmap_union,
-    get_chain_info,
-    get_rpc_state_reader_config,
+    disjoint_hashmap_union, get_chain_info, get_rpc_state_reader_config,
 };
 
 pub const DEFAULT_RETRY_COUNT: usize = 3;

@@ -7,25 +7,20 @@ use itertools::Itertools;
 use pretty_assertions::assert_eq;
 use starknet_api::block::BlockNumber;
 use starknet_api::executable_transaction::{
-    L1HandlerTransaction as ExecutableL1HandlerTransaction,
-    L1HandlerTransaction,
+    L1HandlerTransaction as ExecutableL1HandlerTransaction, L1HandlerTransaction,
 };
 use starknet_api::hash::StarkHash;
-use starknet_api::test_utils::l1_handler::{executable_l1_handler_tx, L1HandlerTxArgs};
+use starknet_api::test_utils::l1_handler::{L1HandlerTxArgs, executable_l1_handler_tx};
 use starknet_api::transaction::TransactionHash;
 use starknet_l1_provider_types::{
-    Event,
-    L1ProviderClient,
-    L1ProviderClientResult,
-    SessionState,
-    ValidationStatus,
+    Event, L1ProviderClient, L1ProviderClientResult, SessionState, ValidationStatus,
 };
 
+use crate::ProviderState;
 use crate::bootstrapper::CommitBlockBacklog;
 use crate::l1_provider::L1Provider;
 use crate::soft_delete_index_map::SoftDeleteIndexMap;
 use crate::transaction_manager::TransactionManager;
-use crate::ProviderState;
 
 pub fn l1_handler(tx_hash: usize) -> L1HandlerTransaction {
     let tx_hash = TransactionHash(StarkHash::from(tx_hash));

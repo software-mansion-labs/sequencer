@@ -6,7 +6,7 @@ use cairo_vm::vm::vm_core::VirtualMachine;
 use rstest::rstest;
 use serde_json;
 
-use super::{fetch_nested_fields_address, IdentifierGetter};
+use super::{IdentifierGetter, fetch_nested_fields_address};
 
 impl IdentifierGetter for HashMap<String, Identifier> {
     fn get_identifier(

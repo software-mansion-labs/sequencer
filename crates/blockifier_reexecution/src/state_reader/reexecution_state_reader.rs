@@ -1,10 +1,10 @@
+use apollo_rpc_execution::DEPRECATED_CONTRACT_SIERRA_SIZE;
 use blockifier::blockifier::config::TransactionExecutorConfig;
 use blockifier::blockifier::transaction_executor::TransactionExecutor;
 use blockifier::state::cached_state::CommitmentStateDiff;
 use blockifier::state::state_api::{StateReader, StateResult};
 use blockifier::transaction::account_transaction::ExecutionFlags;
 use blockifier::transaction::transaction_execution::Transaction as BlockifierTransaction;
-use papyrus_execution::DEPRECATED_CONTRACT_SIERRA_SIZE;
 use starknet_api::block::{BlockHash, BlockNumber};
 use starknet_api::contract_class::{ClassInfo, SierraVersion};
 use starknet_api::core::ClassHash;
@@ -13,8 +13,7 @@ use starknet_api::transaction::{Transaction, TransactionHash};
 use starknet_core::types::ContractClass as StarknetContractClass;
 
 use crate::state_reader::compile::{
-    legacy_to_contract_class_v0,
-    sierra_to_versioned_contract_class_v1,
+    legacy_to_contract_class_v0, sierra_to_versioned_contract_class_v1,
 };
 use crate::state_reader::errors::ReexecutionResult;
 

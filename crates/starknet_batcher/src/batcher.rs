@@ -2,81 +2,51 @@ use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
 
 use apollo_reverts::revert_block;
+use apollo_storage::state::{StateStorageReader, StateStorageWriter};
 use async_trait::async_trait;
 use blockifier::state::contract_class_manager::ContractClassManager;
 use indexmap::IndexSet;
 #[cfg(test)]
 use mockall::automock;
-use papyrus_storage::state::{StateStorageReader, StateStorageWriter};
 use starknet_api::block::{BlockHeaderWithoutHash, BlockNumber};
 use starknet_api::consensus_transaction::InternalConsensusTransaction;
 use starknet_api::core::{ContractAddress, Nonce};
 use starknet_api::state::ThinStateDiff;
 use starknet_api::transaction::TransactionHash;
 use starknet_batcher_types::batcher_types::{
-    BatcherResult,
-    CentralObjects,
-    DecisionReachedInput,
-    DecisionReachedResponse,
-    GetHeightResponse,
-    GetProposalContent,
-    GetProposalContentInput,
-    GetProposalContentResponse,
-    ProposalCommitment,
-    ProposalId,
-    ProposalStatus,
-    ProposeBlockInput,
-    RevertBlockInput,
-    SendProposalContent,
-    SendProposalContentInput,
-    SendProposalContentResponse,
-    StartHeightInput,
+    BatcherResult, CentralObjects, DecisionReachedInput, DecisionReachedResponse,
+    GetHeightResponse, GetProposalContent, GetProposalContentInput, GetProposalContentResponse,
+    ProposalCommitment, ProposalId, ProposalStatus, ProposeBlockInput, RevertBlockInput,
+    SendProposalContent, SendProposalContentInput, SendProposalContentResponse, StartHeightInput,
     ValidateBlockInput,
 };
 use starknet_batcher_types::errors::BatcherError;
-use starknet_class_manager_types::transaction_converter::TransactionConverter;
 use starknet_class_manager_types::SharedClassManagerClient;
+use starknet_class_manager_types::transaction_converter::TransactionConverter;
 use starknet_l1_provider_types::errors::{L1ProviderClientError, L1ProviderError};
 use starknet_l1_provider_types::{SessionState, SharedL1ProviderClient};
 use starknet_mempool_types::communication::SharedMempoolClient;
 use starknet_mempool_types::mempool_types::CommitBlockArgs;
 use starknet_sequencer_infra::component_definitions::{
-    default_component_start_fn,
-    ComponentStarter,
+    ComponentStarter, default_component_start_fn,
 };
 use starknet_state_sync_types::state_sync_types::SyncBlock;
 use tokio::sync::Mutex;
-use tracing::{debug, error, info, instrument, trace, Instrument};
+use tracing::{Instrument, debug, error, info, instrument, trace};
 
 use crate::block_builder::{
-    BlockBuilderError,
-    BlockBuilderExecutionParams,
-    BlockBuilderFactory,
-    BlockBuilderFactoryTrait,
-    BlockBuilderTrait,
-    BlockExecutionArtifacts,
-    BlockMetadata,
+    BlockBuilderError, BlockBuilderExecutionParams, BlockBuilderFactory, BlockBuilderFactoryTrait,
+    BlockBuilderTrait, BlockExecutionArtifacts, BlockMetadata,
 };
 use crate::config::BatcherConfig;
 use crate::metrics::{
+    BATCHED_TRANSACTIONS, CLASS_CACHE_HITS, CLASS_CACHE_MISSES, ProposalMetricsHandle,
+    REJECTED_TRANSACTIONS, REVERTED_BLOCKS, STORAGE_HEIGHT, SYNCED_BLOCKS, SYNCED_TRANSACTIONS,
     register_metrics,
-    ProposalMetricsHandle,
-    BATCHED_TRANSACTIONS,
-    CLASS_CACHE_HITS,
-    CLASS_CACHE_MISSES,
-    REJECTED_TRANSACTIONS,
-    REVERTED_BLOCKS,
-    STORAGE_HEIGHT,
-    SYNCED_BLOCKS,
-    SYNCED_TRANSACTIONS,
 };
 use crate::transaction_provider::{ProposeTransactionProvider, ValidateTransactionProvider};
 use crate::utils::{
-    deadline_as_instant,
-    proposal_status_from,
-    verify_block_input,
-    ProposalResult,
-    ProposalTask,
+    ProposalResult, ProposalTask, deadline_as_instant, proposal_status_from, verify_block_input,
 };
 
 type OutputStreamReceiver = tokio::sync::mpsc::UnboundedReceiver<InternalConsensusTransaction>;
@@ -737,7 +707,7 @@ pub fn create_batcher(
     l1_provider_client: SharedL1ProviderClient,
     class_manager_client: SharedClassManagerClient,
 ) -> Batcher {
-    let (storage_reader, storage_writer) = papyrus_storage::open_storage(config.storage.clone())
+    let (storage_reader, storage_writer) = apollo_storage::open_storage(config.storage.clone())
         .expect("Failed to open batcher's storage");
 
     let block_builder_factory = Box::new(BlockBuilderFactory {
@@ -767,11 +737,11 @@ pub fn create_batcher(
 #[cfg_attr(test, automock)]
 pub trait BatcherStorageReaderTrait: Send + Sync {
     /// Returns the next height that the batcher should work on.
-    fn height(&self) -> papyrus_storage::StorageResult<BlockNumber>;
+    fn height(&self) -> apollo_storage::StorageResult<BlockNumber>;
 }
 
-impl BatcherStorageReaderTrait for papyrus_storage::StorageReader {
-    fn height(&self) -> papyrus_storage::StorageResult<BlockNumber> {
+impl BatcherStorageReaderTrait for apollo_storage::StorageReader {
+    fn height(&self) -> apollo_storage::StorageResult<BlockNumber> {
         self.begin_ro_txn()?.get_state_marker()
     }
 }
@@ -782,17 +752,17 @@ pub trait BatcherStorageWriterTrait: Send + Sync {
         &mut self,
         height: BlockNumber,
         state_diff: ThinStateDiff,
-    ) -> papyrus_storage::StorageResult<()>;
+    ) -> apollo_storage::StorageResult<()>;
 
     fn revert_block(&mut self, height: BlockNumber);
 }
 
-impl BatcherStorageWriterTrait for papyrus_storage::StorageWriter {
+impl BatcherStorageWriterTrait for apollo_storage::StorageWriter {
     fn commit_proposal(
         &mut self,
         height: BlockNumber,
         state_diff: ThinStateDiff,
-    ) -> papyrus_storage::StorageResult<()> {
+    ) -> apollo_storage::StorageResult<()> {
         // TODO(AlonH): write casms.
         self.begin_rw_txn()?.append_state_diff(height, state_diff)?.commit()
     }

@@ -8,7 +8,7 @@ use starknet_class_manager_types::ClassHashes;
 use starknet_sierra_multicompile_types::{MockSierraCompilerClient, RawClass, RawExecutableClass};
 
 use crate::class_manager::ClassManager;
-use crate::class_storage::{create_tmp_dir, CachedClassStorageConfig, FsClassStorage};
+use crate::class_storage::{CachedClassStorageConfig, FsClassStorage, create_tmp_dir};
 use crate::config::ClassManagerConfig;
 
 impl ClassManager<FsClassStorage> {

@@ -8,18 +8,15 @@ use blockifier::transaction::objects::TransactionExecutionInfo;
 use indexmap::IndexMap;
 use starknet_api::consensus_transaction::InternalConsensusTransaction;
 use starknet_api::execution_resources::GasAmount;
-use starknet_api::test_utils::invoke::{internal_invoke_tx, InvokeTxArgs};
-use starknet_api::test_utils::l1_handler::{executable_l1_handler_tx, L1HandlerTxArgs};
-use starknet_api::transaction::fields::Fee;
+use starknet_api::test_utils::invoke::{InvokeTxArgs, internal_invoke_tx};
+use starknet_api::test_utils::l1_handler::{L1HandlerTxArgs, executable_l1_handler_tx};
 use starknet_api::transaction::TransactionHash;
+use starknet_api::transaction::fields::Fee;
 use starknet_api::{class_hash, contract_address, nonce, tx_hash};
 use tokio::sync::mpsc::UnboundedSender;
 
 use crate::block_builder::{
-    BlockBuilderResult,
-    BlockBuilderTrait,
-    BlockExecutionArtifacts,
-    BlockTransactionExecutionData,
+    BlockBuilderResult, BlockBuilderTrait, BlockExecutionArtifacts, BlockTransactionExecutionData,
 };
 use crate::transaction_provider::{NextTxs, TransactionProvider};
 

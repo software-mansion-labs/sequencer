@@ -8,12 +8,11 @@ use starknet_api::deprecated_contract_class::{ContractClass, EntryPointV0};
 use starknet_types_core::felt::Felt;
 
 use crate::hints::class_hash::hinted_class_hash::{
-    compute_cairo_hinted_class_hash,
-    CairoContractDefinition,
+    CairoContractDefinition, compute_cairo_hinted_class_hash,
 };
 use crate::hints::error::{OsHintError, OsHintResult};
 use crate::hints::vars::{CairoStruct, Const};
-use crate::vm_utils::{insert_values_to_fields, CairoSized, IdentifierGetter, LoadCairoObject};
+use crate::vm_utils::{CairoSized, IdentifierGetter, LoadCairoObject, insert_values_to_fields};
 
 impl<IG: IdentifierGetter> LoadCairoObject<IG> for ContractClass {
     fn load_into(

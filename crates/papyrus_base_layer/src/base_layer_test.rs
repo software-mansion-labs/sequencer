@@ -3,13 +3,11 @@ use pretty_assertions::assert_eq;
 use starknet_api::block::{BlockHash, BlockHashAndNumber, BlockNumber};
 use starknet_api::felt;
 
+use crate::BaseLayerContract;
 use crate::ethereum_base_layer_contract::{EthereumBaseLayerConfig, EthereumBaseLayerContract};
 use crate::test_utils::{
-    anvil_instance_from_config,
-    ethereum_base_layer_config_for_anvil,
-    get_test_ethereum_node,
+    anvil_instance_from_config, ethereum_base_layer_config_for_anvil, get_test_ethereum_node,
 };
-use crate::BaseLayerContract;
 
 #[tokio::test]
 // Note: the test requires ganache-cli installed, otherwise it is ignored.

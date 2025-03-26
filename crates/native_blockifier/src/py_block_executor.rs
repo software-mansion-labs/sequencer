@@ -2,11 +2,10 @@
 
 use std::str::FromStr;
 
+use apollo_state_reader::papyrus_state::PapyrusReader;
 use blockifier::blockifier::config::{ContractClassManagerConfig, TransactionExecutorConfig};
 use blockifier::blockifier::transaction_executor::{
-    BlockExecutionSummary,
-    TransactionExecutor,
-    TransactionExecutorError,
+    BlockExecutionSummary, TransactionExecutor, TransactionExecutorError,
 };
 use blockifier::blockifier_versioned_constants::VersionedConstants;
 use blockifier::bouncer::BouncerConfig;
@@ -14,7 +13,6 @@ use blockifier::context::{BlockContext, ChainInfo, FeeTokenAddresses};
 use blockifier::state::contract_class_manager::ContractClassManager;
 use blockifier::transaction::objects::TransactionExecutionInfo;
 use blockifier::transaction::transaction_execution::Transaction;
-use papyrus_state_reader::papyrus_state::PapyrusReader;
 use pyo3::prelude::*;
 use pyo3::types::{PyBytes, PyList};
 use pyo3::{FromPyObject, PyAny, Python};
@@ -26,19 +24,14 @@ use starknet_types_core::felt::Felt;
 
 use crate::errors::{NativeBlockifierError, NativeBlockifierResult};
 use crate::py_objects::{
-    PyBouncerConfig,
-    PyConcurrencyConfig,
-    PyContractClassManagerConfig,
+    PyBouncerConfig, PyConcurrencyConfig, PyContractClassManagerConfig,
     PyVersionedConstantsOverrides,
 };
 use crate::py_state_diff::{PyBlockInfo, PyStateDiff};
-use crate::py_transaction::{py_tx, PyClassInfo, PY_TX_PARSING_ERR};
-use crate::py_utils::{int_to_chain_id, into_block_number_hash_pair, PyFelt};
+use crate::py_transaction::{PY_TX_PARSING_ERR, PyClassInfo, py_tx};
+use crate::py_utils::{PyFelt, int_to_chain_id, into_block_number_hash_pair};
 use crate::storage::{
-    PapyrusStorage,
-    RawDeclaredClassMapping,
-    RawDeprecatedDeclaredClassMapping,
-    Storage,
+    PapyrusStorage, RawDeclaredClassMapping, RawDeprecatedDeclaredClassMapping, Storage,
     StorageConfig,
 };
 

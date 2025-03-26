@@ -2,8 +2,7 @@ use blockifier::state::state_api::StateReader;
 #[cfg(any(feature = "testing", test))]
 use blockifier::test_utils::dict_state_reader::DictStateReader;
 use cairo_vm::hint_processor::builtin_hint_processor::builtin_hint_processor_definition::{
-    BuiltinHintProcessor,
-    HintProcessorData,
+    BuiltinHintProcessor, HintProcessorData,
 };
 use cairo_vm::hint_processor::hint_processor_definition::{HintExtension, HintProcessorLogic};
 use cairo_vm::stdlib::any::Any;

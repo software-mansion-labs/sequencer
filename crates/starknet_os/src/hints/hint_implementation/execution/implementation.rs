@@ -4,11 +4,8 @@ use std::vec::IntoIter;
 use blockifier::state::state_api::{State, StateReader};
 use cairo_vm::any_box;
 use cairo_vm::hint_processor::builtin_hint_processor::hint_utils::{
-    get_constant_from_var_name,
-    get_integer_from_var_name,
-    get_ptr_from_var_name,
-    insert_value_from_var_name,
-    insert_value_into_ap,
+    get_constant_from_var_name, get_integer_from_var_name, get_ptr_from_var_name,
+    insert_value_from_var_name, insert_value_into_ap,
 };
 use cairo_vm::types::relocatable::MaybeRelocatable;
 use starknet_api::block::BlockNumber;
@@ -23,7 +20,7 @@ use crate::hints::hint_implementation::execution::utils::tx_name_as_felt;
 use crate::hints::types::HintArgs;
 use crate::hints::vars::{CairoStruct, Const, Ids, Scope};
 use crate::syscall_handler_utils::SyscallHandlerType;
-use crate::vm_utils::{get_address_of_nested_fields, LoadCairoObject};
+use crate::vm_utils::{LoadCairoObject, get_address_of_nested_fields};
 
 pub(crate) fn load_next_tx<S: StateReader>(
     HintArgs { exec_scopes, vm, ids_data, ap_tracking, .. }: HintArgs<'_, S>,

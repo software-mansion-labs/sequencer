@@ -9,7 +9,7 @@ use starknet_patricia_storage::storage_trait::{DbKey, DbValue};
 use starknet_types_core::felt::Felt;
 use tracing::level_filters::LevelFilter;
 
-use crate::patricia_merkle_tree::types::{class_hash_into_node_index, CompiledClassHash};
+use crate::patricia_merkle_tree::types::{CompiledClassHash, class_hash_into_node_index};
 
 #[cfg(test)]
 #[path = "input_test.rs"]

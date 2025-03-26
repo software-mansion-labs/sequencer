@@ -4,22 +4,18 @@ use starknet_api::core::ContractAddress;
 use starknet_patricia::hash::hash_trait::HashOutput;
 use starknet_patricia::patricia_merkle_tree::node_data::leaf::LeafModifications;
 use starknet_patricia::patricia_merkle_tree::original_skeleton_tree::tree::{
-    OriginalSkeletonTree,
-    OriginalSkeletonTreeImpl,
+    OriginalSkeletonTree, OriginalSkeletonTreeImpl,
 };
 use starknet_patricia::patricia_merkle_tree::types::{NodeIndex, SortedLeafIndices};
 use starknet_patricia_storage::storage_trait::Storage;
 
 use crate::block_committer::input::{
-    contract_address_into_node_index,
-    Config,
-    StarknetStorageValue,
+    Config, StarknetStorageValue, contract_address_into_node_index,
 };
 use crate::forest::forest_errors::{ForestError, ForestResult};
 use crate::patricia_merkle_tree::leaf::leaf_impl::ContractState;
 use crate::patricia_merkle_tree::tree::{
-    OriginalSkeletonClassesTrieConfig,
-    OriginalSkeletonContractsTrieConfig,
+    OriginalSkeletonClassesTrieConfig, OriginalSkeletonContractsTrieConfig,
     OriginalSkeletonStorageTrieConfig,
 };
 use crate::patricia_merkle_tree::types::CompiledClassHash;

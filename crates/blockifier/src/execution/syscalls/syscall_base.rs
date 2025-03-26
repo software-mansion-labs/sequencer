@@ -1,42 +1,29 @@
 /// This file is for sharing common logic between Native and VM syscall implementations.
-use std::collections::{hash_map, HashMap};
+use std::collections::{HashMap, hash_map};
 use std::convert::From;
 
 use starknet_api::block::{BlockHash, BlockNumber};
-use starknet_api::core::{calculate_contract_address, ClassHash, ContractAddress};
+use starknet_api::core::{ClassHash, ContractAddress, calculate_contract_address};
 use starknet_api::state::StorageKey;
 use starknet_api::transaction::fields::{Calldata, ContractAddressSalt};
 use starknet_api::transaction::{
-    signed_tx_version,
-    EventContent,
-    TransactionOptions,
-    TransactionVersion,
+    EventContent, TransactionOptions, TransactionVersion, signed_tx_version,
 };
 use starknet_types_core::felt::Felt;
 
 use super::exceeds_event_size_limit;
 use crate::abi::constants;
 use crate::execution::call_info::{
-    CallInfo,
-    MessageToL1,
-    OrderedEvent,
-    OrderedL2ToL1Message,
-    StorageAccessTracker,
+    CallInfo, MessageToL1, OrderedEvent, OrderedL2ToL1Message, StorageAccessTracker,
 };
 use crate::execution::common_hints::ExecutionMode;
 use crate::execution::entry_point::{
-    CallEntryPoint,
-    ConstructorContext,
-    EntryPointExecutionContext,
-    ExecutableCallEntryPoint,
+    CallEntryPoint, ConstructorContext, EntryPointExecutionContext, ExecutableCallEntryPoint,
 };
 use crate::execution::execution_utils::execute_deployment;
 use crate::execution::syscalls::hint_processor::{
-    SyscallExecutionError,
-    BLOCK_NUMBER_OUT_OF_RANGE_ERROR,
-    ENTRYPOINT_FAILED_ERROR,
-    INVALID_INPUT_LENGTH_ERROR,
-    OUT_OF_GAS_ERROR,
+    BLOCK_NUMBER_OUT_OF_RANGE_ERROR, ENTRYPOINT_FAILED_ERROR, INVALID_INPUT_LENGTH_ERROR,
+    OUT_OF_GAS_ERROR, SyscallExecutionError,
 };
 use crate::state::state_api::State;
 use crate::transaction::account_transaction::is_cairo1;

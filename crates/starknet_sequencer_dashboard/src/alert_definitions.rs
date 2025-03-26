@@ -2,12 +2,7 @@ use const_format::formatcp;
 use starknet_gateway::metrics::TRANSACTIONS_RECEIVED;
 
 use crate::dashboard::{
-    Alert,
-    AlertComparisonOp,
-    AlertCondition,
-    AlertGroup,
-    AlertLogicalOp,
-    Alerts,
+    Alert, AlertComparisonOp, AlertCondition, AlertGroup, AlertLogicalOp, Alerts,
 };
 
 pub const DEV_ALERTS_JSON_PATH: &str = "Monitoring/sequencer/dev_grafana_alerts.json";

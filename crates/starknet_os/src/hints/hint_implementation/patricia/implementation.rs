@@ -1,8 +1,6 @@
 use blockifier::state::state_api::StateReader;
 use cairo_vm::hint_processor::builtin_hint_processor::hint_utils::{
-    get_integer_from_var_name,
-    insert_value_from_var_name,
-    insert_value_into_ap,
+    get_integer_from_var_name, insert_value_from_var_name, insert_value_into_ap,
 };
 use num_bigint::BigUint;
 use starknet_types_core::felt::Felt;

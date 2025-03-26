@@ -7,13 +7,10 @@ use itertools::Itertools;
 use mempool_test_utils::in_ci;
 use mempool_test_utils::starknet_api_test_utils::DEFAULT_ANVIL_L1_ACCOUNT_ADDRESS;
 use papyrus_base_layer::ethereum_base_layer_contract::{
-    EthereumBaseLayerConfig,
-    EthereumBaseLayerContract,
-    Starknet,
+    EthereumBaseLayerConfig, EthereumBaseLayerContract, Starknet,
 };
 use papyrus_base_layer::test_utils::{
-    anvil_instance_from_config,
-    ethereum_base_layer_config_for_anvil,
+    anvil_instance_from_config, ethereum_base_layer_config_for_anvil,
 };
 use starknet_api::block::BlockNumber;
 use starknet_api::contract_address;
@@ -30,7 +27,7 @@ use starknet_state_sync_types::state_sync_types::SyncBlock;
 use crate::l1_provider::create_l1_provider;
 use crate::l1_scraper::{L1Scraper, L1ScraperConfig};
 use crate::test_utils::FakeL1ProviderClient;
-use crate::{event_identifiers_to_track, L1ProviderConfig};
+use crate::{L1ProviderConfig, event_identifiers_to_track};
 
 const fn height_add(block_number: BlockNumber, k: u64) -> BlockNumber {
     BlockNumber(block_number.0 + k)

@@ -8,7 +8,7 @@ use starknet_mempool_types::communication::MempoolRequestAndResponseSender;
 use starknet_sequencer_infra::component_definitions::ComponentCommunication;
 use starknet_sierra_multicompile_types::SierraCompilerRequestAndResponseSender;
 use starknet_state_sync_types::communication::StateSyncRequestAndResponseSender;
-use tokio::sync::mpsc::{channel, Receiver, Sender};
+use tokio::sync::mpsc::{Receiver, Sender, channel};
 
 pub struct SequencerNodeCommunication {
     batcher_channel: ComponentCommunication<BatcherRequestAndResponseSender>,

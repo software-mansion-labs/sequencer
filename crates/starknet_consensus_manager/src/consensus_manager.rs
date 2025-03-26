@@ -5,18 +5,18 @@ mod consensus_manager_test;
 use std::collections::HashMap;
 use std::sync::Arc;
 
+use apollo_network::gossipsub_impl::Topic;
+use apollo_network::network_manager::metrics::{BroadcastNetworkMetrics, NetworkMetrics};
+use apollo_network::network_manager::{BroadcastTopicChannels, NetworkManager};
+use apollo_protobuf::consensus::{HeightAndRound, ProposalPart, StreamMessage, Vote};
 use apollo_reverts::revert_blocks_and_eternal_pending;
 use async_trait::async_trait;
 use futures::channel::mpsc;
-use papyrus_network::gossipsub_impl::Topic;
-use papyrus_network::network_manager::metrics::{BroadcastNetworkMetrics, NetworkMetrics};
-use papyrus_network::network_manager::{BroadcastTopicChannels, NetworkManager};
-use papyrus_protobuf::consensus::{HeightAndRound, ProposalPart, StreamMessage, Vote};
 use starknet_api::block::BlockNumber;
 use starknet_batcher_types::batcher_types::RevertBlockInput;
 use starknet_batcher_types::communication::SharedBatcherClient;
 use starknet_class_manager_types::SharedClassManagerClient;
-use starknet_consensus::stream_handler::{StreamHandler, CHANNEL_BUFFER_LENGTH};
+use starknet_consensus::stream_handler::{CHANNEL_BUFFER_LENGTH, StreamHandler};
 use starknet_consensus::types::ConsensusError;
 use starknet_consensus_orchestrator::cende::CendeAmbassador;
 use starknet_consensus_orchestrator::sequencer_consensus_context::SequencerConsensusContext;
@@ -28,12 +28,9 @@ use tracing::info;
 
 use crate::config::ConsensusManagerConfig;
 use crate::metrics::{
-    CONSENSUS_NUM_BLACKLISTED_PEERS,
-    CONSENSUS_NUM_CONNECTED_PEERS,
-    CONSENSUS_PROPOSALS_NUM_RECEIVED_MESSAGES,
-    CONSENSUS_PROPOSALS_NUM_SENT_MESSAGES,
-    CONSENSUS_VOTES_NUM_RECEIVED_MESSAGES,
-    CONSENSUS_VOTES_NUM_SENT_MESSAGES,
+    CONSENSUS_NUM_BLACKLISTED_PEERS, CONSENSUS_NUM_CONNECTED_PEERS,
+    CONSENSUS_PROPOSALS_NUM_RECEIVED_MESSAGES, CONSENSUS_PROPOSALS_NUM_SENT_MESSAGES,
+    CONSENSUS_VOTES_NUM_RECEIVED_MESSAGES, CONSENSUS_VOTES_NUM_SENT_MESSAGES,
 };
 
 #[derive(Clone)]

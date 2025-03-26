@@ -2,7 +2,7 @@ use std::fs::File;
 use std::path::PathBuf;
 use std::process::{Command, Stdio};
 
-use serde_json::{from_reader, Value};
+use serde_json::{Value, from_reader};
 use starknet_infra_utils::path::resolve_project_relative_path;
 use starknet_infra_utils::test_utils::assert_json_eq;
 use tempfile::NamedTempFile;

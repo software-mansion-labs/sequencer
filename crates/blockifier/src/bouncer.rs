@@ -1,16 +1,15 @@
 use std::collections::{BTreeMap, HashMap, HashSet};
 
+use apollo_config::dumping::{SerializeConfig, append_sub_config_name, ser_param};
+use apollo_config::{ParamPath, ParamPrivacyInput, SerializedParam};
 use cairo_vm::types::builtin_name::BuiltinName;
 use cairo_vm::vm::runners::cairo_runner::ExecutionResources;
-use papyrus_config::dumping::{append_sub_config_name, ser_param, SerializeConfig};
-use papyrus_config::{ParamPath, ParamPrivacyInput, SerializedParam};
 use serde::{Deserialize, Serialize};
 use starknet_api::core::ClassHash;
 use starknet_api::execution_resources::GasAmount;
 
 use crate::blockifier::transaction_executor::{
-    TransactionExecutorError,
-    TransactionExecutorResult,
+    TransactionExecutorError, TransactionExecutorResult,
 };
 use crate::blockifier_versioned_constants::VersionedConstants;
 use crate::execution::call_info::ExecutionSummary;

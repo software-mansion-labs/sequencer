@@ -7,22 +7,17 @@ use async_trait::async_trait;
 use metrics::set_default_local_recorder;
 use metrics_exporter_prometheus::PrometheusBuilder;
 use serde::{Deserialize, Serialize};
-use tokio::sync::mpsc::{channel, Receiver};
 use tokio::sync::Semaphore;
+use tokio::sync::mpsc::{Receiver, channel};
 use tokio::task::{self, JoinSet};
 
 use crate::component_client::{ClientResult, LocalComponentClient, RemoteComponentClient};
 use crate::component_definitions::{
-    ComponentClient,
-    ComponentRequestAndResponseSender,
-    ComponentRequestHandler,
-    ComponentStarter,
+    ComponentClient, ComponentRequestAndResponseSender, ComponentRequestHandler, ComponentStarter,
     RemoteClientConfig,
 };
 use crate::component_server::{
-    ComponentServerStarter,
-    ConcurrentLocalComponentServer,
-    LocalComponentServer,
+    ComponentServerStarter, ConcurrentLocalComponentServer, LocalComponentServer,
     RemoteComponentServer,
 };
 use crate::tests::{AVAILABLE_PORTS, TEST_LOCAL_SERVER_METRICS, TEST_REMOTE_SERVER_METRICS};

@@ -9,19 +9,15 @@ use starknet_api::contract_class::{ContractClass, SierraVersion};
 use starknet_api::state::SierraContractClass;
 use starknet_infra_utils::path::resolve_project_relative_path;
 
+#[cfg(feature = "cairo_native")]
+use crate::SierraToNativeCompiler;
 use crate::command_line_compiler::CommandLineCompiler;
 use crate::config::{
-    SierraCompilationConfig,
-    DEFAULT_MAX_CASM_BYTECODE_SIZE,
-    DEFAULT_MAX_CPU_TIME,
-    DEFAULT_MAX_MEMORY_USAGE,
-    DEFAULT_MAX_NATIVE_BYTECODE_SIZE,
-    DEFAULT_OPTIMIZATION_LEVEL,
+    DEFAULT_MAX_CASM_BYTECODE_SIZE, DEFAULT_MAX_CPU_TIME, DEFAULT_MAX_MEMORY_USAGE,
+    DEFAULT_MAX_NATIVE_BYTECODE_SIZE, DEFAULT_OPTIMIZATION_LEVEL, SierraCompilationConfig,
 };
 use crate::errors::CompilationUtilError;
 use crate::test_utils::contract_class_from_file;
-#[cfg(feature = "cairo_native")]
-use crate::SierraToNativeCompiler;
 use crate::{RawClass, SierraCompiler, SierraToCasmCompiler};
 
 const SIERRA_COMPILATION_CONFIG: SierraCompilationConfig = SierraCompilationConfig {

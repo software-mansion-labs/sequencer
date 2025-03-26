@@ -1,28 +1,20 @@
 use async_trait::async_trait;
 use starknet_api::state::SierraContractClass;
 use starknet_class_manager_types::{
-    ClassHashes,
-    ClassId,
-    ClassManagerError,
-    ClassManagerResult,
-    ExecutableClassHash,
+    ClassHashes, ClassId, ClassManagerError, ClassManagerResult, ExecutableClassHash,
 };
 use starknet_sequencer_infra::component_definitions::{
-    default_component_start_fn,
-    ComponentStarter,
+    ComponentStarter, default_component_start_fn,
 };
 use starknet_sierra_multicompile_types::{
-    RawClass,
-    RawExecutableClass,
-    SharedSierraCompilerClient,
-    SierraCompilerClientError,
+    RawClass, RawExecutableClass, SharedSierraCompilerClient, SierraCompilerClientError,
 };
 use tracing::instrument;
 
+use crate::FsClassManager;
 use crate::class_storage::{CachedClassStorage, ClassStorage, FsClassStorage};
 use crate::config::{ClassManagerConfig, FsClassManagerConfig};
 use crate::metrics::register_metrics;
-use crate::FsClassManager;
 
 #[cfg(test)]
 #[path = "class_manager_test.rs"]

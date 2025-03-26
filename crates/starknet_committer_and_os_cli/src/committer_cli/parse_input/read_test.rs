@@ -4,11 +4,7 @@ use assert_matches::assert_matches;
 use pretty_assertions::assert_eq;
 use starknet_api::core::{ClassHash, ContractAddress, Nonce};
 use starknet_committer::block_committer::input::{
-    ConfigImpl,
-    Input,
-    StarknetStorageKey,
-    StarknetStorageValue,
-    StateDiff,
+    ConfigImpl, Input, StarknetStorageKey, StarknetStorageValue, StateDiff,
 };
 use starknet_committer::patricia_merkle_tree::types::CompiledClassHash;
 use starknet_patricia::hash::hash_trait::HashOutput;

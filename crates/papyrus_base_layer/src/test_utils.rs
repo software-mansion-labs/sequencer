@@ -8,13 +8,11 @@ use alloy::transports::http::{Client, Http};
 use colored::*;
 use ethers::utils::{Ganache, GanacheInstance};
 use tar::Archive;
-use tempfile::{tempdir, TempDir};
+use tempfile::{TempDir, tempdir};
 use url::Url;
 
 use crate::ethereum_base_layer_contract::{
-    EthereumBaseLayerConfig,
-    EthereumBaseLayerContract,
-    Starknet,
+    EthereumBaseLayerConfig, EthereumBaseLayerContract, Starknet,
 };
 
 type TestEthereumNodeHandle = (GanacheInstance, TempDir);

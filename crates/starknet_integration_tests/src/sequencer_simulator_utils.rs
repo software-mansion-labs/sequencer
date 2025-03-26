@@ -10,7 +10,7 @@ use url::Url;
 
 use crate::integration_test_manager::nonce_to_usize;
 use crate::monitoring_utils;
-use crate::utils::{send_consensus_txs, TestScenario};
+use crate::utils::{TestScenario, send_consensus_txs};
 
 pub struct SequencerSimulator {
     monitoring_client: MonitoringClient,

@@ -1,10 +1,10 @@
 use std::net::IpAddr;
 
+use axum::Router;
 use axum::http::StatusCode;
 use axum::response::Response;
-use axum::Router;
-use hyper::body::to_bytes;
 use hyper::Client;
+use hyper::body::to_bytes;
 use metrics::{counter, describe_counter};
 use pretty_assertions::assert_eq;
 use tokio::spawn;
@@ -14,12 +14,7 @@ use tower::ServiceExt;
 use super::MonitoringEndpointConfig;
 use crate::config::{DEFAULT_IP, DEFAULT_PORT};
 use crate::monitoring_endpoint::{
-    create_monitoring_endpoint,
-    MonitoringEndpoint,
-    ALIVE,
-    METRICS,
-    READY,
-    VERSION,
+    ALIVE, METRICS, MonitoringEndpoint, READY, VERSION, create_monitoring_endpoint,
 };
 use crate::test_utils::build_request;
 

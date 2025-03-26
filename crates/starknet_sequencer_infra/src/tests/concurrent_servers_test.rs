@@ -4,23 +4,18 @@ use std::time::Duration;
 
 use async_trait::async_trait;
 use serde::{Deserialize, Serialize};
-use tokio::sync::mpsc::channel;
 use tokio::sync::Semaphore;
+use tokio::sync::mpsc::channel;
 use tokio::task;
 use tokio::time::timeout;
 
 use crate::component_client::{ClientResult, LocalComponentClient, RemoteComponentClient};
 use crate::component_definitions::{
-    ComponentClient,
-    ComponentRequestAndResponseSender,
-    ComponentRequestHandler,
-    ComponentStarter,
+    ComponentClient, ComponentRequestAndResponseSender, ComponentRequestHandler, ComponentStarter,
     RemoteClientConfig,
 };
 use crate::component_server::{
-    ComponentServerStarter,
-    ConcurrentLocalComponentServer,
-    RemoteComponentServer,
+    ComponentServerStarter, ConcurrentLocalComponentServer, RemoteComponentServer,
 };
 use crate::tests::{AVAILABLE_PORTS, TEST_LOCAL_SERVER_METRICS, TEST_REMOTE_SERVER_METRICS};
 

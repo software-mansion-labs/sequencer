@@ -2,8 +2,8 @@ use std::cmp::min;
 use std::collections::HashMap;
 
 use ethnum::U256;
-use rand::prelude::IteratorRandom;
 use rand::Rng;
+use rand::prelude::IteratorRandom;
 use rand_distr::num_traits::ToPrimitive;
 use rand_distr::{Distribution, Geometric};
 use starknet_api::core::{ClassHash, ContractAddress, Nonce, PATRICIA_KEY_UPPER_BOUND};
@@ -11,27 +11,17 @@ use starknet_committer::block_committer::input::StarknetStorageValue;
 use starknet_committer::forest::filled_forest::FilledForest;
 use starknet_committer::patricia_merkle_tree::leaf::leaf_impl::ContractState;
 use starknet_committer::patricia_merkle_tree::types::{
-    ClassesTrie,
-    CompiledClassHash,
-    ContractsTrie,
-    StorageTrie,
-    StorageTrieMap,
+    ClassesTrie, CompiledClassHash, ContractsTrie, StorageTrie, StorageTrieMap,
 };
 use starknet_patricia::felt::u256_from_felt;
 use starknet_patricia::hash::hash_trait::HashOutput;
 use starknet_patricia::patricia_merkle_tree::external_test_utils::{
-    get_random_u256,
-    u256_try_into_felt,
+    get_random_u256, u256_try_into_felt,
 };
 use starknet_patricia::patricia_merkle_tree::filled_tree::node::FilledNode;
 use starknet_patricia::patricia_merkle_tree::node_data::inner_node::{
-    BinaryData,
-    EdgeData,
-    EdgePath,
-    EdgePathLength,
-    NodeData,
-    NodeDataDiscriminants as NodeDataVariants,
-    PathToBottom,
+    BinaryData, EdgeData, EdgePath, EdgePathLength, NodeData,
+    NodeDataDiscriminants as NodeDataVariants, PathToBottom,
 };
 use starknet_patricia::patricia_merkle_tree::types::NodeIndex;
 use starknet_types_core::felt::Felt;

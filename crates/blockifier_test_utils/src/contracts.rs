@@ -13,7 +13,7 @@ use starknet_types_core::felt::Felt;
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
 
-use crate::cairo_compile::{cairo0_compile, cairo1_compile, CompilationArtifacts};
+use crate::cairo_compile::{CompilationArtifacts, cairo0_compile, cairo1_compile};
 use crate::cairo_versions::{CairoVersion, RunnableCairo1};
 
 pub const CAIRO1_FEATURE_CONTRACTS_DIR: &str = "resources/feature_contracts/cairo1";

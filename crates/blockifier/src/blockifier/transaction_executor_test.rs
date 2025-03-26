@@ -4,20 +4,18 @@ use blockifier_test_utils::calldata::create_calldata;
 use blockifier_test_utils::contracts::FeatureContract;
 use pretty_assertions::assert_eq;
 use rstest::rstest;
+use starknet_api::test_utils::DEFAULT_STRK_L1_GAS_PRICE;
 use starknet_api::test_utils::declare::executable_declare_tx;
 use starknet_api::test_utils::deploy_account::executable_deploy_account_tx;
 use starknet_api::test_utils::invoke::executable_invoke_tx;
-use starknet_api::test_utils::DEFAULT_STRK_L1_GAS_PRICE;
-use starknet_api::transaction::fields::Fee;
 use starknet_api::transaction::TransactionVersion;
+use starknet_api::transaction::fields::Fee;
 use starknet_api::{declare_tx_args, deploy_account_tx_args, felt, invoke_tx_args, nonce};
 use starknet_types_core::felt::Felt;
 
 use crate::blockifier::config::TransactionExecutorConfig;
 use crate::blockifier::transaction_executor::{
-    TransactionExecutor,
-    TransactionExecutorError,
-    BLOCK_STATE_ACCESS_ERR,
+    BLOCK_STATE_ACCESS_ERR, TransactionExecutor, TransactionExecutorError,
 };
 use crate::bouncer::{Bouncer, BouncerWeights};
 use crate::context::BlockContext;
@@ -26,16 +24,12 @@ use crate::state::state_api::StateReader;
 use crate::test_utils::contracts::FeatureContractTrait;
 use crate::test_utils::initial_test_state::test_state;
 use crate::test_utils::l1_handler::l1handler_tx;
-use crate::test_utils::{maybe_dummy_block_hash_and_number, BALANCE};
+use crate::test_utils::{BALANCE, maybe_dummy_block_hash_and_number};
 use crate::transaction::account_transaction::AccountTransaction;
 use crate::transaction::errors::TransactionExecutionError;
 use crate::transaction::test_utils::{
-    block_context,
-    calculate_class_info_for_testing,
-    create_test_init_data,
-    emit_n_events_tx,
-    l1_resource_bounds,
-    TestInitData,
+    TestInitData, block_context, calculate_class_info_for_testing, create_test_init_data,
+    emit_n_events_tx, l1_resource_bounds,
 };
 use crate::transaction::transaction_execution::Transaction;
 

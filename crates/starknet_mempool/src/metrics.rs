@@ -1,12 +1,8 @@
 use starknet_api::rpc_transaction::{
-    InternalRpcTransactionLabelValue,
-    InternalRpcTransactionWithoutTxHash,
+    InternalRpcTransactionLabelValue, InternalRpcTransactionWithoutTxHash,
 };
 use starknet_sequencer_metrics::metrics::{
-    LabeledMetricCounter,
-    MetricCounter,
-    MetricGauge,
-    MetricHistogram,
+    LabeledMetricCounter, MetricCounter, MetricGauge, MetricHistogram,
 };
 use starknet_sequencer_metrics::{define_metrics, generate_permutation_labels};
 use strum::{EnumVariantNames, VariantNames};

@@ -1,18 +1,15 @@
 use std::sync::Arc;
 
+use apollo_proc_macros::handle_all_response_variants;
 use async_trait::async_trait;
 #[cfg(any(feature = "testing", test))]
 use mockall::automock;
-use papyrus_proc_macros::handle_all_response_variants;
 use serde::{Deserialize, Serialize};
 use starknet_sequencer_infra::component_client::{
-    ClientError,
-    LocalComponentClient,
-    RemoteComponentClient,
+    ClientError, LocalComponentClient, RemoteComponentClient,
 };
 use starknet_sequencer_infra::component_definitions::{
-    ComponentClient,
-    ComponentRequestAndResponseSender,
+    ComponentClient, ComponentRequestAndResponseSender,
 };
 use starknet_sequencer_infra::impl_debug_for_infra_requests_and_responses;
 use starknet_state_sync_types::state_sync_types::SyncBlock;
@@ -20,18 +17,9 @@ use strum_macros::AsRefStr;
 use thiserror::Error;
 
 use crate::batcher_types::{
-    BatcherResult,
-    DecisionReachedInput,
-    DecisionReachedResponse,
-    GetHeightResponse,
-    GetProposalContentInput,
-    GetProposalContentResponse,
-    ProposeBlockInput,
-    RevertBlockInput,
-    SendProposalContentInput,
-    SendProposalContentResponse,
-    StartHeightInput,
-    ValidateBlockInput,
+    BatcherResult, DecisionReachedInput, DecisionReachedResponse, GetHeightResponse,
+    GetProposalContentInput, GetProposalContentResponse, ProposeBlockInput, RevertBlockInput,
+    SendProposalContentInput, SendProposalContentResponse, StartHeightInput, ValidateBlockInput,
 };
 use crate::errors::BatcherError;
 

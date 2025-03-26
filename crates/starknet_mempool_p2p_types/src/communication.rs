@@ -1,18 +1,15 @@
 use std::sync::Arc;
 
+use apollo_network_types::network_types::BroadcastedMessageMetadata;
+use apollo_proc_macros::handle_all_response_variants;
 use async_trait::async_trait;
-use papyrus_network_types::network_types::BroadcastedMessageMetadata;
-use papyrus_proc_macros::handle_all_response_variants;
 use serde::{Deserialize, Serialize};
 use starknet_api::rpc_transaction::InternalRpcTransaction;
 use starknet_sequencer_infra::component_client::{
-    ClientError,
-    LocalComponentClient,
-    RemoteComponentClient,
+    ClientError, LocalComponentClient, RemoteComponentClient,
 };
 use starknet_sequencer_infra::component_definitions::{
-    ComponentClient,
-    ComponentRequestAndResponseSender,
+    ComponentClient, ComponentRequestAndResponseSender,
 };
 use starknet_sequencer_infra::impl_debug_for_infra_requests_and_responses;
 use strum_macros::AsRefStr;

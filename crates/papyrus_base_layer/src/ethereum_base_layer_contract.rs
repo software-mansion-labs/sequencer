@@ -8,22 +8,19 @@ use alloy::providers::network::Ethereum;
 use alloy::providers::{Provider, ProviderBuilder, RootProvider};
 use alloy::rpc::json_rpc::RpcError;
 use alloy::rpc::types::eth::{
-    BlockId,
-    BlockNumberOrTag,
-    BlockTransactionsKind,
-    Filter as EthEventFilter,
+    BlockId, BlockNumberOrTag, BlockTransactionsKind, Filter as EthEventFilter,
 };
 use alloy::sol;
 use alloy::sol_types::sol_data;
-use alloy::transports::http::{Client, Http};
 use alloy::transports::TransportErrorKind;
+use alloy::transports::http::{Client, Http};
+use apollo_config::dumping::{SerializeConfig, ser_param};
+use apollo_config::{ParamPath, ParamPrivacyInput, SerializedParam};
 use async_trait::async_trait;
-use papyrus_config::dumping::{ser_param, SerializeConfig};
-use papyrus_config::{ParamPath, ParamPrivacyInput, SerializedParam};
 use serde::{Deserialize, Serialize};
+use starknet_api::StarknetApiError;
 use starknet_api::block::{BlockHash, BlockHashAndNumber, BlockNumber};
 use starknet_api::hash::StarkHash;
-use starknet_api::StarknetApiError;
 use url::Url;
 use validator::Validate;
 

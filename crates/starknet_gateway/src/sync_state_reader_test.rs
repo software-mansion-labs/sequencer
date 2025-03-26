@@ -1,19 +1,13 @@
 use std::sync::Arc;
 
+use apollo_test_utils::{GetTestInstance, get_rng};
 use blockifier::execution::contract_class::RunnableCompiledClass;
 use blockifier::state::state_api::StateReader;
 use cairo_lang_starknet_classes::casm_contract_class::CasmContractClass;
 use mockall::predicate;
-use papyrus_test_utils::{get_rng, GetTestInstance};
 use starknet_api::block::{
-    BlockHeaderWithoutHash,
-    BlockInfo,
-    BlockNumber,
-    BlockTimestamp,
-    GasPricePerToken,
-    GasPriceVector,
-    GasPrices,
-    NonzeroGasPrice,
+    BlockHeaderWithoutHash, BlockInfo, BlockNumber, BlockTimestamp, GasPricePerToken,
+    GasPriceVector, GasPrices, NonzeroGasPrice,
 };
 use starknet_api::contract_class::{ContractClass, SierraVersion};
 use starknet_api::core::SequencerContractAddress;

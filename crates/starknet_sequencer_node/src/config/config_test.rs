@@ -2,8 +2,8 @@ use std::env;
 use std::fs::File;
 use std::net::{IpAddr, Ipv4Addr};
 
+use apollo_config::dumping::SerializeConfig;
 use colored::Colorize;
-use papyrus_config::dumping::SerializeConfig;
 use rstest::rstest;
 use starknet_infra_utils::path::resolve_project_relative_path;
 use starknet_infra_utils::test_utils::assert_json_eq;
@@ -11,15 +11,11 @@ use starknet_sequencer_infra::component_definitions::{LocalServerConfig, RemoteC
 use validator::Validate;
 
 use crate::config::component_execution_config::{
-    ReactiveComponentExecutionConfig,
-    ReactiveComponentExecutionMode,
+    ReactiveComponentExecutionConfig, ReactiveComponentExecutionMode,
 };
 use crate::config::monitoring::MonitoringConfig;
 use crate::config::node_config::{
-    SequencerNodeConfig,
-    CONFIG_NON_POINTERS_WHITELIST,
-    CONFIG_POINTERS,
-    DEFAULT_CONFIG_PATH,
+    CONFIG_NON_POINTERS_WHITELIST, CONFIG_POINTERS, DEFAULT_CONFIG_PATH, SequencerNodeConfig,
 };
 
 const LOCAL_EXECUTION_MODE: ReactiveComponentExecutionMode =

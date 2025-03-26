@@ -1,13 +1,11 @@
 use clap::{Args, Parser, Subcommand};
 use starknet_committer_and_os_cli::block_hash_cli::run_block_hash_cli::{
-    run_block_hash_cli,
-    BlockHashCliCommand,
+    BlockHashCliCommand, run_block_hash_cli,
 };
 use starknet_committer_and_os_cli::committer_cli::run_committer_cli::{
-    run_committer_cli,
-    CommitterCliCommand,
+    CommitterCliCommand, run_committer_cli,
 };
-use starknet_committer_and_os_cli::os_cli::run_os_cli::{run_os_cli, OsCliCommand};
+use starknet_committer_and_os_cli::os_cli::run_os_cli::{OsCliCommand, run_os_cli};
 use starknet_committer_and_os_cli::tracing_utils::configure_tracing;
 use tracing::info;
 

@@ -1,13 +1,10 @@
 use async_trait::async_trait;
 use starknet_sequencer_infra::component_definitions::ComponentRequestHandler;
 use starknet_sequencer_infra::component_server::{
-    ConcurrentLocalComponentServer,
-    RemoteComponentServer,
+    ConcurrentLocalComponentServer, RemoteComponentServer,
 };
 use starknet_sierra_multicompile_types::{
-    SierraCompilerError,
-    SierraCompilerRequest,
-    SierraCompilerResponse,
+    SierraCompilerError, SierraCompilerRequest, SierraCompilerResponse,
 };
 
 use crate::SierraCompiler;

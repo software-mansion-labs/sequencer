@@ -5,10 +5,7 @@ use std::path::PathBuf;
 
 use blockifier::abi::constants;
 use blockifier::blockifier::config::{
-    CairoNativeRunConfig,
-    ConcurrencyConfig,
-    ContractClassManagerConfig,
-    NativeClassesWhitelist,
+    CairoNativeRunConfig, ConcurrencyConfig, ContractClassManagerConfig, NativeClassesWhitelist,
 };
 use blockifier::blockifier_versioned_constants::VersionedConstantsOverrides;
 use blockifier::bouncer::{BouncerConfig, BouncerWeights};

@@ -6,17 +6,14 @@ use starknet_monitoring_endpoint::config::MonitoringEndpointConfig;
 use starknet_monitoring_endpoint::test_utils::MonitoringClient;
 use starknet_sequencer_node::config::component_config::ComponentConfig;
 use starknet_sequencer_node::config::config_utils::{
-    dump_config_file,
-    DeploymentBaseAppConfig,
-    PresetConfig,
+    DeploymentBaseAppConfig, PresetConfig, dump_config_file,
 };
 use starknet_sequencer_node::config::definitions::ConfigPointersMap;
 use starknet_sequencer_node::config::node_config::{
-    SequencerNodeConfig,
-    CONFIG_NON_POINTERS_WHITELIST,
+    CONFIG_NON_POINTERS_WHITELIST, SequencerNodeConfig,
 };
 use starknet_sequencer_node::test_utils::node_runner::NodeRunner;
-use tempfile::{tempdir, TempDir};
+use tempfile::{TempDir, tempdir};
 use tokio::fs::create_dir_all;
 
 const NODE_CONFIG_CHANGES_FILE_PATH: &str = "node_integration_test_config_changes.json";

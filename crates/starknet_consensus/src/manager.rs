@@ -12,27 +12,23 @@ mod manager_test;
 use std::collections::BTreeMap;
 use std::time::Duration;
 
+use apollo_network::network_manager::BroadcastTopicClientTrait;
+use apollo_network_types::network_types::BroadcastedMessageMetadata;
+use apollo_protobuf::consensus::{ProposalInit, Vote};
+use apollo_protobuf::converters::ProtobufConversionError;
 use futures::channel::mpsc;
 use futures::stream::FuturesUnordered;
 use futures::{FutureExt, StreamExt};
 use metrics::counter;
 use papyrus_common::metrics::{PAPYRUS_CONSENSUS_HEIGHT, PAPYRUS_CONSENSUS_SYNC_COUNT};
-use papyrus_network::network_manager::BroadcastTopicClientTrait;
-use papyrus_network_types::network_types::BroadcastedMessageMetadata;
-use papyrus_protobuf::consensus::{ProposalInit, Vote};
-use papyrus_protobuf::converters::ProtobufConversionError;
 use starknet_api::block::BlockNumber;
 use tracing::{debug, error, info, instrument, trace, warn};
 
 use crate::config::TimeoutsConfig;
 use crate::metrics::{
-    register_metrics,
-    CONSENSUS_BLOCK_NUMBER,
-    CONSENSUS_CACHED_VOTES,
-    CONSENSUS_DECISIONS_REACHED_BY_CONSENSUS,
-    CONSENSUS_DECISIONS_REACHED_BY_SYNC,
-    CONSENSUS_MAX_CACHED_BLOCK_NUMBER,
-    CONSENSUS_PROPOSALS_RECEIVED,
+    CONSENSUS_BLOCK_NUMBER, CONSENSUS_CACHED_VOTES, CONSENSUS_DECISIONS_REACHED_BY_CONSENSUS,
+    CONSENSUS_DECISIONS_REACHED_BY_SYNC, CONSENSUS_MAX_CACHED_BLOCK_NUMBER,
+    CONSENSUS_PROPOSALS_RECEIVED, register_metrics,
 };
 use crate::single_height_consensus::{ShcReturn, SingleHeightConsensus};
 use crate::types::{BroadcastVoteChannel, ConsensusContext, ConsensusError, Decision, ValidatorId};

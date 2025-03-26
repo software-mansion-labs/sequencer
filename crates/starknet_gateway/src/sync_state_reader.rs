@@ -9,9 +9,7 @@ use starknet_api::data_availability::L1DataAvailabilityMode;
 use starknet_api::state::StorageKey;
 use starknet_class_manager_types::SharedClassManagerClient;
 use starknet_state_sync_types::communication::{
-    SharedStateSyncClient,
-    StateSyncClientError,
-    StateSyncClientResult,
+    SharedStateSyncClient, StateSyncClientError, StateSyncClientResult,
 };
 use starknet_state_sync_types::errors::StateSyncError;
 use starknet_types_core::felt::Felt;

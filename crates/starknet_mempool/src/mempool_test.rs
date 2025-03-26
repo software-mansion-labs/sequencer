@@ -2,16 +2,16 @@ use std::collections::{HashMap, VecDeque};
 use std::sync::Arc;
 use std::time::Duration;
 
+use apollo_network_types::network_types::BroadcastedMessageMetadata;
+use apollo_test_utils::{GetTestInstance, get_rng};
 use mempool_test_utils::starknet_api_test_utils::test_valid_resource_bounds;
 use metrics_exporter_prometheus::PrometheusBuilder;
 use mockall::predicate;
-use papyrus_network_types::network_types::BroadcastedMessageMetadata;
-use papyrus_test_utils::{get_rng, GetTestInstance};
 use pretty_assertions::assert_eq;
 use rstest::{fixture, rstest};
 use starknet_api::block::{GasPrice, NonzeroGasPrice};
 use starknet_api::rpc_transaction::InternalRpcTransaction;
-use starknet_api::test_utils::declare::{internal_rpc_declare_tx, DeclareTxArgs};
+use starknet_api::test_utils::declare::{DeclareTxArgs, internal_rpc_declare_tx};
 use starknet_api::transaction::TransactionHash;
 use starknet_api::{contract_address, declare_tx_args, nonce, tx_hash};
 use starknet_mempool_p2p_types::communication::MockMempoolP2pPropagatorClient;
@@ -24,12 +24,8 @@ use crate::communication::MempoolCommunicationWrapper;
 use crate::mempool::{Mempool, MempoolConfig, MempoolContent, MempoolState, TransactionReference};
 use crate::metrics::register_metrics;
 use crate::test_utils::{
-    add_tx,
-    add_tx_expect_error,
-    commit_block,
+    FakeClock, MempoolMetrics, add_tx, add_tx_expect_error, commit_block,
     get_txs_and_assert_expected,
-    FakeClock,
-    MempoolMetrics,
 };
 use crate::transaction_pool::TransactionPool;
 use crate::transaction_queue::TransactionQueue;

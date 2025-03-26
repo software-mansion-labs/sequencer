@@ -1,60 +1,43 @@
 use std::sync::Arc;
 
+use apollo_network_types::network_types::BroadcastedMessageMetadata;
+use apollo_test_utils::{GetTestInstance, get_rng};
 use assert_matches::assert_matches;
 use blockifier::context::ChainInfo;
 use blockifier_test_utils::cairo_versions::{CairoVersion, RunnableCairo1};
 use mempool_test_utils::starknet_api_test_utils::{declare_tx, invoke_tx};
 use metrics_exporter_prometheus::PrometheusBuilder;
 use mockall::predicate::eq;
-use papyrus_network_types::network_types::BroadcastedMessageMetadata;
-use papyrus_test_utils::{get_rng, GetTestInstance};
 use rstest::{fixture, rstest};
 use starknet_api::core::{CompiledClassHash, ContractAddress, Nonce};
 use starknet_api::rpc_transaction::{
-    InternalRpcTransaction,
-    InternalRpcTransactionWithoutTxHash,
-    RpcDeclareTransaction,
-    RpcTransaction,
-    RpcTransactionLabelValue,
+    InternalRpcTransaction, InternalRpcTransactionWithoutTxHash, RpcDeclareTransaction,
+    RpcTransaction, RpcTransactionLabelValue,
 };
 use starknet_api::test_utils::CHAIN_ID_FOR_TESTS;
 use starknet_api::transaction::{
-    InvokeTransaction,
-    TransactionHash,
-    TransactionHasher,
-    TransactionVersion,
+    InvokeTransaction, TransactionHash, TransactionHasher, TransactionVersion,
 };
 use starknet_class_manager_types::transaction_converter::TransactionConverter;
 use starknet_class_manager_types::{EmptyClassManagerClient, SharedClassManagerClient};
 use starknet_gateway_types::errors::GatewaySpecError;
 use starknet_mempool_types::communication::{
-    AddTransactionArgsWrapper,
-    MempoolClientError,
-    MempoolClientResult,
-    MockMempoolClient,
+    AddTransactionArgsWrapper, MempoolClientError, MempoolClientResult, MockMempoolClient,
 };
 use starknet_mempool_types::errors::MempoolError;
 use starknet_mempool_types::mempool_types::{AccountState, AddTransactionArgs};
 use strum::VariantNames;
 
 use crate::config::{
-    GatewayConfig,
-    StatefulTransactionValidatorConfig,
-    StatelessTransactionValidatorConfig,
+    GatewayConfig, StatefulTransactionValidatorConfig, StatelessTransactionValidatorConfig,
 };
 use crate::gateway::Gateway;
 use crate::metrics::{
+    GATEWAY_ADD_TX_LATENCY, GatewayMetricHandle, LABEL_NAME_SOURCE, LABEL_NAME_TX_TYPE,
+    SourceLabelValue, TRANSACTIONS_FAILED, TRANSACTIONS_RECEIVED, TRANSACTIONS_SENT_TO_MEMPOOL,
     register_metrics,
-    GatewayMetricHandle,
-    SourceLabelValue,
-    GATEWAY_ADD_TX_LATENCY,
-    LABEL_NAME_SOURCE,
-    LABEL_NAME_TX_TYPE,
-    TRANSACTIONS_FAILED,
-    TRANSACTIONS_RECEIVED,
-    TRANSACTIONS_SENT_TO_MEMPOOL,
 };
-use crate::state_reader_test_utils::{local_test_state_reader_factory, TestStateReaderFactory};
+use crate::state_reader_test_utils::{TestStateReaderFactory, local_test_state_reader_factory};
 
 #[fixture]
 fn config() -> GatewayConfig {

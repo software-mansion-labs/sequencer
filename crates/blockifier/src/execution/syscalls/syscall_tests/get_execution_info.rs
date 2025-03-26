@@ -5,25 +5,14 @@ use starknet_api::block::GasPrice;
 use starknet_api::data_availability::DataAvailabilityMode;
 use starknet_api::execution_resources::GasAmount;
 use starknet_api::test_utils::{
-    CHAIN_ID_FOR_TESTS,
-    CURRENT_BLOCK_NUMBER,
-    CURRENT_BLOCK_NUMBER_FOR_VALIDATE,
-    CURRENT_BLOCK_TIMESTAMP,
-    CURRENT_BLOCK_TIMESTAMP_FOR_VALIDATE,
-    TEST_SEQUENCER_ADDRESS,
+    CHAIN_ID_FOR_TESTS, CURRENT_BLOCK_NUMBER, CURRENT_BLOCK_NUMBER_FOR_VALIDATE,
+    CURRENT_BLOCK_TIMESTAMP, CURRENT_BLOCK_TIMESTAMP_FOR_VALIDATE, TEST_SEQUENCER_ADDRESS,
 };
 use starknet_api::transaction::fields::{
-    AccountDeploymentData,
-    AllResourceBounds,
-    Calldata,
-    Fee,
-    PaymasterData,
-    Resource,
-    ResourceBounds,
-    Tip,
-    ValidResourceBounds,
+    AccountDeploymentData, AllResourceBounds, Calldata, Fee, PaymasterData, Resource,
+    ResourceBounds, Tip, ValidResourceBounds,
 };
-use starknet_api::transaction::{TransactionVersion, QUERY_VERSION_BASE};
+use starknet_api::transaction::{QUERY_VERSION_BASE, TransactionVersion};
 use starknet_api::{felt, nonce, tx_hash};
 use starknet_types_core::felt::Felt;
 use test_case::test_case;
@@ -35,12 +24,9 @@ use crate::execution::entry_point::CallEntryPoint;
 use crate::execution::syscalls::hint_processor::valid_resource_bounds_as_felts;
 use crate::test_utils::contracts::FeatureContractData;
 use crate::test_utils::initial_test_state::test_state_ex;
-use crate::test_utils::{trivial_external_entry_point_with_address, BALANCE};
+use crate::test_utils::{BALANCE, trivial_external_entry_point_with_address};
 use crate::transaction::objects::{
-    CommonAccountFields,
-    CurrentTransactionInfo,
-    DeprecatedTransactionInfo,
-    TransactionInfo,
+    CommonAccountFields, CurrentTransactionInfo, DeprecatedTransactionInfo, TransactionInfo,
 };
 
 #[cfg_attr(

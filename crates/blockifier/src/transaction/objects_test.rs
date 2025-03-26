@@ -8,15 +8,8 @@ use starknet_types_core::felt::Felt;
 
 use crate::blockifier_versioned_constants::VersionedConstants;
 use crate::execution::call_info::{
-    CallExecution,
-    CallInfo,
-    ChargedResources,
-    EventSummary,
-    ExecutionSummary,
-    MessageToL1,
-    OrderedEvent,
-    OrderedL2ToL1Message,
-    StorageAccessTracker,
+    CallExecution, CallInfo, ChargedResources, EventSummary, ExecutionSummary, MessageToL1,
+    OrderedEvent, OrderedL2ToL1Message, StorageAccessTracker,
 };
 use crate::execution::entry_point::CallEntryPoint;
 use crate::transaction::objects::TransactionExecutionInfo;

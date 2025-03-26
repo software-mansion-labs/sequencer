@@ -8,49 +8,28 @@ use hyper::header::CONTENT_TYPE;
 use hyper::service::{make_service_fn, service_fn};
 use hyper::{Body, Client, Request, Response, Server, StatusCode, Uri};
 use rstest::rstest;
-use serde::de::DeserializeOwned;
 use serde::Serialize;
+use serde::de::DeserializeOwned;
 use starknet_types_core::felt::Felt;
-use tokio::sync::mpsc::channel;
 use tokio::sync::Mutex;
+use tokio::sync::mpsc::channel;
 use tokio::task;
 
 use crate::component_client::{
-    ClientError,
-    ClientResult,
-    LocalComponentClient,
-    RemoteComponentClient,
+    ClientError, ClientResult, LocalComponentClient, RemoteComponentClient,
 };
 use crate::component_definitions::{
-    ComponentClient,
-    ComponentRequestAndResponseSender,
-    RemoteClientConfig,
-    ServerError,
-    APPLICATION_OCTET_STREAM,
+    APPLICATION_OCTET_STREAM, ComponentClient, ComponentRequestAndResponseSender,
+    RemoteClientConfig, ServerError,
 };
 use crate::component_server::{
-    ComponentServerStarter,
-    LocalComponentServer,
-    RemoteComponentServer,
+    ComponentServerStarter, LocalComponentServer, RemoteComponentServer,
 };
 use crate::serde_utils::SerdeWrapper;
 use crate::tests::{
-    test_a_b_functionality,
-    ComponentA,
-    ComponentAClientTrait,
-    ComponentARequest,
-    ComponentAResponse,
-    ComponentB,
-    ComponentBClientTrait,
-    ComponentBRequest,
-    ComponentBResponse,
-    ResultA,
-    ResultB,
-    ValueA,
-    ValueB,
-    AVAILABLE_PORTS,
-    TEST_LOCAL_SERVER_METRICS,
-    TEST_REMOTE_SERVER_METRICS,
+    AVAILABLE_PORTS, ComponentA, ComponentAClientTrait, ComponentARequest, ComponentAResponse,
+    ComponentB, ComponentBClientTrait, ComponentBRequest, ComponentBResponse, ResultA, ResultB,
+    TEST_LOCAL_SERVER_METRICS, TEST_REMOTE_SERVER_METRICS, ValueA, ValueB, test_a_b_functionality,
 };
 
 type ComponentAClient = RemoteComponentClient<ComponentARequest, ComponentAResponse>;

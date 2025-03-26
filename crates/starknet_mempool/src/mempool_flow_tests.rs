@@ -9,11 +9,7 @@ use crate::add_tx_input;
 use crate::config::MempoolConfig;
 use crate::mempool::Mempool;
 use crate::test_utils::{
-    add_tx,
-    add_tx_expect_error,
-    commit_block,
-    get_txs_and_assert_expected,
-    FakeClock,
+    FakeClock, add_tx, add_tx_expect_error, commit_block, get_txs_and_assert_expected,
 };
 
 // Fixtures.

@@ -1,26 +1,17 @@
 use cairo_lang_starknet_classes::casm_contract_class::CasmContractClass;
 use serde::{Deserialize, Serialize};
 
+use crate::StarknetApiError;
 use crate::contract_class::{ClassInfo, ContractClass};
 use crate::core::{ChainId, ClassHash, CompiledClassHash, ContractAddress, Nonce};
 use crate::data_availability::DataAvailabilityMode;
 use crate::transaction::fields::{
-    AccountDeploymentData,
-    Calldata,
-    ContractAddressSalt,
-    Fee,
-    PaymasterData,
-    Tip,
-    TransactionSignature,
-    ValidResourceBounds,
+    AccountDeploymentData, Calldata, ContractAddressSalt, Fee, PaymasterData, Tip,
+    TransactionSignature, ValidResourceBounds,
 };
 use crate::transaction::{
-    CalculateContractAddress,
-    TransactionHash,
-    TransactionHasher,
-    TransactionVersion,
+    CalculateContractAddress, TransactionHash, TransactionHasher, TransactionVersion,
 };
-use crate::StarknetApiError;
 
 macro_rules! implement_inner_tx_getter_calls {
     ($(($field:ident, $field_type:ty)),*) => {

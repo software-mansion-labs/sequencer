@@ -1,26 +1,23 @@
 use std::sync::Arc;
 use std::time::Duration;
 
-use futures::future::{pending, ready, BoxFuture};
+use apollo_network::network_manager::test_utils::{
+    BroadcastNetworkMock, TestSubscriberChannels, mock_register_broadcast_topic,
+};
+use apollo_network::network_manager::{BroadcastTopicChannels, NetworkError};
+use apollo_network_types::network_types::BroadcastedMessageMetadata;
+use apollo_protobuf::mempool::RpcTransactionBatch;
+use apollo_test_utils::{GetTestInstance, get_rng};
+use futures::future::{BoxFuture, pending, ready};
 use futures::stream::StreamExt;
 use futures::{FutureExt, SinkExt};
-use papyrus_network::network_manager::test_utils::{
-    mock_register_broadcast_topic,
-    BroadcastNetworkMock,
-    TestSubscriberChannels,
-};
-use papyrus_network::network_manager::{BroadcastTopicChannels, NetworkError};
-use papyrus_network_types::network_types::BroadcastedMessageMetadata;
-use papyrus_protobuf::mempool::RpcTransactionBatch;
-use papyrus_test_utils::{get_rng, GetTestInstance};
 use starknet_api::rpc_transaction::RpcTransaction;
 use starknet_api::transaction::TransactionHash;
 use starknet_gateway_types::communication::{GatewayClient, GatewayClientError, MockGatewayClient};
 use starknet_gateway_types::errors::{GatewayError, GatewaySpecError};
 use starknet_gateway_types::gateway_types::GatewayInput;
 use starknet_mempool_p2p_types::communication::{
-    MempoolP2pPropagatorClient,
-    MockMempoolP2pPropagatorClient,
+    MempoolP2pPropagatorClient, MockMempoolP2pPropagatorClient,
 };
 use starknet_sequencer_infra::component_definitions::ComponentStarter;
 

@@ -1,11 +1,9 @@
 use std::fs;
 
-use blockifier_test_utils::cairo_compile::{prepare_group_tag_compiler_deps, CompilationArtifacts};
+use blockifier_test_utils::cairo_compile::{CompilationArtifacts, prepare_group_tag_compiler_deps};
 use blockifier_test_utils::cairo_versions::{CairoVersion, RunnableCairo1};
 use blockifier_test_utils::contracts::{
-    FeatureContract,
-    CAIRO1_FEATURE_CONTRACTS_DIR,
-    SIERRA_CONTRACTS_SUBDIR,
+    CAIRO1_FEATURE_CONTRACTS_DIR, FeatureContract, SIERRA_CONTRACTS_SUBDIR,
 };
 use pretty_assertions::assert_eq;
 use rstest::rstest;

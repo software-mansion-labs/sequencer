@@ -3,9 +3,9 @@ use std::str::FromStr;
 
 use axum::body::Body;
 use axum::http::Request;
+use hyper::Client;
 use hyper::body::to_bytes;
 use hyper::client::HttpConnector;
-use hyper::Client;
 use num_traits::Num;
 use starknet_infra_utils::run_until::run_until;
 use starknet_infra_utils::tracing::{CustomLogger, TraceLevel};

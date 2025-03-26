@@ -4,10 +4,10 @@ use cairo_lang_starknet_classes::contract_class::ContractClass as CairoLangContr
 #[cfg(feature = "cairo_native")]
 use cairo_native::executor::AotContractExecutor;
 use config::SierraCompilationConfig;
+use starknet_api::StarknetApiError;
 use starknet_api::contract_class::{ContractClass, SierraVersion};
 use starknet_api::core::CompiledClassHash;
 use starknet_api::state::SierraContractClass;
-use starknet_api::StarknetApiError;
 use starknet_sequencer_infra::component_definitions::ComponentStarter;
 use starknet_sierra_multicompile_types::{RawClass, RawExecutableClass, RawExecutableHashedClass};
 use thiserror::Error;

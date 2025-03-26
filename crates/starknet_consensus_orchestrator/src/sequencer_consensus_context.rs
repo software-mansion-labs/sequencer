@@ -10,68 +10,39 @@ use std::collections::{BTreeMap, HashMap};
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
 
+use apollo_network::network_manager::{BroadcastTopicClient, BroadcastTopicClientTrait};
+use apollo_protobuf::consensus::{
+    ConsensusBlockInfo, DEFAULT_VALIDATOR_ID, HeightAndRound, ProposalFin, ProposalInit,
+    ProposalPart, TransactionBatch, Vote,
+};
 use async_trait::async_trait;
 use futures::channel::{mpsc, oneshot};
 use futures::{FutureExt, SinkExt, StreamExt};
-use papyrus_network::network_manager::{BroadcastTopicClient, BroadcastTopicClientTrait};
-use papyrus_protobuf::consensus::{
-    ConsensusBlockInfo,
-    HeightAndRound,
-    ProposalFin,
-    ProposalInit,
-    ProposalPart,
-    TransactionBatch,
-    Vote,
-    DEFAULT_VALIDATOR_ID,
-};
 use starknet_api::block::{
-    BlockHash,
-    BlockHashAndNumber,
-    BlockHeaderWithoutHash,
-    BlockNumber,
-    BlockTimestamp,
-    GasPrice,
-    GasPricePerToken,
-    GasPriceVector,
-    GasPrices,
-    NonzeroGasPrice,
+    BlockHash, BlockHashAndNumber, BlockHeaderWithoutHash, BlockNumber, BlockTimestamp, GasPrice,
+    GasPricePerToken, GasPriceVector, GasPrices, NonzeroGasPrice,
 };
 use starknet_api::consensus_transaction::InternalConsensusTransaction;
 use starknet_api::core::{ContractAddress, SequencerContractAddress};
 use starknet_api::data_availability::L1DataAvailabilityMode;
 use starknet_api::transaction::TransactionHash;
 use starknet_batcher_types::batcher_types::{
-    DecisionReachedInput,
-    DecisionReachedResponse,
-    GetProposalContent,
-    GetProposalContentInput,
-    ProposalId,
-    ProposalStatus,
-    ProposeBlockInput,
-    SendProposalContent,
-    SendProposalContentInput,
-    StartHeightInput,
-    ValidateBlockInput,
+    DecisionReachedInput, DecisionReachedResponse, GetProposalContent, GetProposalContentInput,
+    ProposalId, ProposalStatus, ProposeBlockInput, SendProposalContent, SendProposalContentInput,
+    StartHeightInput, ValidateBlockInput,
 };
 use starknet_batcher_types::communication::{
-    BatcherClient,
-    BatcherClientError,
-    BatcherClientResult,
-};
-use starknet_class_manager_types::transaction_converter::{
-    TransactionConverter,
-    TransactionConverterTrait,
+    BatcherClient, BatcherClientError, BatcherClientResult,
 };
 use starknet_class_manager_types::SharedClassManagerClient;
-use starknet_consensus::types::{
-    ConsensusContext,
-    ConsensusError,
-    ProposalCommitment,
-    Round,
-    ValidatorId,
+use starknet_class_manager_types::transaction_converter::{
+    TransactionConverter, TransactionConverterTrait,
 };
-use starknet_l1_gas_price_types::errors::EthToStrkOracleClientError;
+use starknet_consensus::types::{
+    ConsensusContext, ConsensusError, ProposalCommitment, Round, ValidatorId,
+};
 use starknet_l1_gas_price_types::EthToStrkOracleClientTrait;
+use starknet_l1_gas_price_types::errors::EthToStrkOracleClientError;
 use starknet_state_sync_types::communication::SharedStateSyncClient;
 use starknet_state_sync_types::state_sync_types::SyncBlock;
 use starknet_types_core::felt::Felt;
@@ -79,11 +50,11 @@ use tokio::task::JoinHandle;
 use tokio::time::Instant;
 use tokio_util::sync::CancellationToken;
 use tokio_util::task::AbortOnDropHandle;
-use tracing::{debug, error, error_span, info, instrument, trace, warn, Instrument};
+use tracing::{Instrument, debug, error, error_span, info, instrument, trace, warn};
 
 use crate::cende::{BlobParameters, CendeContext};
 use crate::config::ContextConfig;
-use crate::fee_market::{calculate_next_base_gas_price, FeeMarketInfo};
+use crate::fee_market::{FeeMarketInfo, calculate_next_base_gas_price};
 use crate::metrics::{CONSENSUS_NUM_BATCHES_IN_PROPOSAL, CONSENSUS_NUM_TXS_IN_PROPOSAL};
 use crate::orchestrator_versioned_constants::VersionedConstants;
 

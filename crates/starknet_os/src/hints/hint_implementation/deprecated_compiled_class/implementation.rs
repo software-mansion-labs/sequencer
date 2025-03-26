@@ -5,9 +5,7 @@ use std::collections::{HashMap, HashSet};
 use blockifier::state::state_api::StateReader;
 use cairo_vm::hint_processor::builtin_hint_processor::hint_utils::insert_value_from_var_name;
 use cairo_vm::hint_processor::hint_processor_definition::{
-    HintExtension,
-    HintProcessorLogic,
-    HintReference,
+    HintExtension, HintProcessorLogic, HintReference,
 };
 use cairo_vm::serde::deserialize_program::{HintParams, ReferenceManager};
 use cairo_vm::types::relocatable::Relocatable;
@@ -19,7 +17,7 @@ use starknet_types_core::felt::Felt;
 use crate::hints::error::{OsHintError, OsHintExtensionResult, OsHintResult};
 use crate::hints::types::HintArgs;
 use crate::hints::vars::{CairoStruct, Ids, Scope};
-use crate::vm_utils::{get_address_of_nested_fields, LoadCairoObject};
+use crate::vm_utils::{LoadCairoObject, get_address_of_nested_fields};
 
 pub(crate) fn load_deprecated_class_facts<S: StateReader>(
     HintArgs { hint_processor, vm, exec_scopes, ids_data, ap_tracking, .. }: HintArgs<'_, S>,

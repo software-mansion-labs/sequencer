@@ -8,7 +8,7 @@ use starknet_batcher_types::batcher_types::{GetHeightResponse, RevertBlockInput}
 use starknet_batcher_types::communication::MockBatcherClient;
 use starknet_class_manager_types::EmptyClassManagerClient;
 use starknet_state_sync_types::communication::MockStateSyncClient;
-use tokio::time::{timeout, Duration};
+use tokio::time::{Duration, timeout};
 
 use crate::config::ConsensusManagerConfig;
 use crate::consensus_manager::ConsensusManager;

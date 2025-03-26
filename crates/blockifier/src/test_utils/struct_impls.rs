@@ -19,17 +19,12 @@ use starknet_api::core::ClassHash;
 use starknet_api::deprecated_contract_class::ContractClass as DeprecatedContractClass;
 use starknet_api::execution_resources::GasAmount;
 use starknet_api::test_utils::{
-    CHAIN_ID_FOR_TESTS,
-    TEST_ERC20_CONTRACT_ADDRESS,
-    TEST_ERC20_CONTRACT_ADDRESS2,
+    CHAIN_ID_FOR_TESTS, TEST_ERC20_CONTRACT_ADDRESS, TEST_ERC20_CONTRACT_ADDRESS2,
 };
 
 use crate::blockifier::config::{CairoNativeRunConfig, ContractClassManagerConfig};
 use crate::blockifier_versioned_constants::{
-    GasCosts,
-    OsConstants,
-    VersionedConstants,
-    VERSIONED_CONSTANTS_LATEST_JSON,
+    GasCosts, OsConstants, VERSIONED_CONSTANTS_LATEST_JSON, VersionedConstants,
 };
 use crate::bouncer::{BouncerConfig, BouncerWeights};
 use crate::context::{BlockContext, ChainInfo, FeeTokenAddresses, TransactionContext};
@@ -38,10 +33,7 @@ use crate::execution::common_hints::ExecutionMode;
 #[cfg(feature = "cairo_native")]
 use crate::execution::contract_class::CompiledClassV1;
 use crate::execution::entry_point::{
-    CallEntryPoint,
-    EntryPointExecutionContext,
-    EntryPointExecutionResult,
-    SierraGasRevertTracker,
+    CallEntryPoint, EntryPointExecutionContext, EntryPointExecutionResult, SierraGasRevertTracker,
 };
 #[cfg(feature = "cairo_native")]
 use crate::execution::native::contract_class::NativeCompiledClassV1;
@@ -49,9 +41,7 @@ use crate::state::contract_class_manager::ContractClassManager;
 use crate::state::state_api::State;
 use crate::test_utils::update_json_value;
 use crate::transaction::objects::{
-    CurrentTransactionInfo,
-    DeprecatedTransactionInfo,
-    TransactionInfo,
+    CurrentTransactionInfo, DeprecatedTransactionInfo, TransactionInfo,
 };
 
 impl CallEntryPoint {

@@ -16,22 +16,10 @@ use starknet_api::test_utils::CHAIN_ID_FOR_TESTS;
 use starknet_api::transaction::TransactionHash;
 use starknet_api::{contract_address, nonce, tx_hash};
 use starknet_batcher_types::batcher_types::{
-    DecisionReachedInput,
-    DecisionReachedResponse,
-    GetHeightResponse,
-    GetProposalContent,
-    GetProposalContentInput,
-    GetProposalContentResponse,
-    ProposalCommitment,
-    ProposalId,
-    ProposalStatus,
-    ProposeBlockInput,
-    RevertBlockInput,
-    SendProposalContent,
-    SendProposalContentInput,
-    SendProposalContentResponse,
-    StartHeightInput,
-    ValidateBlockInput,
+    DecisionReachedInput, DecisionReachedResponse, GetHeightResponse, GetProposalContent,
+    GetProposalContentInput, GetProposalContentResponse, ProposalCommitment, ProposalId,
+    ProposalStatus, ProposeBlockInput, RevertBlockInput, SendProposalContent,
+    SendProposalContentInput, SendProposalContentResponse, StartHeightInput, ValidateBlockInput,
 };
 use starknet_batcher_types::errors::BatcherError;
 use starknet_class_manager_types::transaction_converter::TransactionConverter;
@@ -47,32 +35,16 @@ use validator::Validate;
 
 use crate::batcher::{Batcher, MockBatcherStorageReaderTrait, MockBatcherStorageWriterTrait};
 use crate::block_builder::{
-    AbortSignalSender,
-    BlockBuilderConfig,
-    BlockBuilderError,
-    BlockBuilderResult,
-    BlockExecutionArtifacts,
-    FailOnErrorCause,
-    MockBlockBuilderFactoryTrait,
+    AbortSignalSender, BlockBuilderConfig, BlockBuilderError, BlockBuilderResult,
+    BlockExecutionArtifacts, FailOnErrorCause, MockBlockBuilderFactoryTrait,
 };
 use crate::config::BatcherConfig;
 use crate::metrics::{
-    BATCHED_TRANSACTIONS,
-    PROPOSAL_ABORTED,
-    PROPOSAL_FAILED,
-    PROPOSAL_STARTED,
-    PROPOSAL_SUCCEEDED,
-    REJECTED_TRANSACTIONS,
-    REVERTED_BLOCKS,
-    STORAGE_HEIGHT,
-    SYNCED_BLOCKS,
-    SYNCED_TRANSACTIONS,
+    BATCHED_TRANSACTIONS, PROPOSAL_ABORTED, PROPOSAL_FAILED, PROPOSAL_STARTED, PROPOSAL_SUCCEEDED,
+    REJECTED_TRANSACTIONS, REVERTED_BLOCKS, STORAGE_HEIGHT, SYNCED_BLOCKS, SYNCED_TRANSACTIONS,
 };
 use crate::test_utils::{
-    test_txs,
-    verify_indexed_execution_infos,
-    FakeProposeBlockBuilder,
-    FakeValidateBlockBuilder,
+    FakeProposeBlockBuilder, FakeValidateBlockBuilder, test_txs, verify_indexed_execution_infos,
 };
 
 const INITIAL_HEIGHT: BlockNumber = BlockNumber(3);

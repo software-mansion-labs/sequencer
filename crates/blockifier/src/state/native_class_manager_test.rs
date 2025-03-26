@@ -1,5 +1,5 @@
-use std::sync::mpsc::{sync_channel, TrySendError};
 use std::sync::Arc;
+use std::sync::mpsc::{TrySendError, sync_channel};
 use std::thread::sleep;
 
 use assert_matches::assert_matches;
@@ -13,17 +13,11 @@ use starknet_sierra_multicompile::errors::CompilationUtilError;
 use crate::blockifier::config::{CairoNativeRunConfig, NativeClassesWhitelist};
 use crate::execution::contract_class::{CompiledClassV1, RunnableCompiledClass};
 use crate::state::global_cache::{
-    CachedCairoNative,
-    CachedClass,
-    RawClassCache,
-    GLOBAL_CONTRACT_CACHE_SIZE_FOR_TEST,
+    CachedCairoNative, CachedClass, GLOBAL_CONTRACT_CACHE_SIZE_FOR_TEST, RawClassCache,
 };
 use crate::state::native_class_manager::{
+    CacheMetrics, CompilationRequest, ContractClassManagerError, NativeClassManager,
     process_compilation_request,
-    CacheMetrics,
-    CompilationRequest,
-    ContractClassManagerError,
-    NativeClassManager,
 };
 use crate::test_utils::contracts::FeatureContractTrait;
 

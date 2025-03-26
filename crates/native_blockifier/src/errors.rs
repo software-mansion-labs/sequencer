@@ -3,9 +3,7 @@ use blockifier::blockifier::transaction_executor::TransactionExecutorError;
 use blockifier::bouncer::BuiltinCounterMap;
 use blockifier::state::errors::StateError;
 use blockifier::transaction::errors::{
-    ParseError,
-    TransactionExecutionError,
-    TransactionPreValidationError,
+    ParseError, TransactionExecutionError, TransactionPreValidationError,
 };
 use blockifier::transaction::transaction_types::TransactionType;
 use cairo_vm::types::errors::program_errors::ProgramError;
@@ -73,7 +71,7 @@ native_blockifier_errors!(
     (StarknetApiError, StarknetApiError, PyStarknetApiError),
     (StateError, StateError, PyStateError),
     (StatefulValidatorError, StatefulValidatorError, PyStatefulValidatorError),
-    (StorageError, papyrus_storage::StorageError, PyStorageError),
+    (StorageError, apollo_storage::StorageError, PyStorageError),
     (TransactionExecutionError, TransactionExecutionError, PyTransactionExecutionError),
     (TransactionExecutorError, TransactionExecutorError, PyTransactionExecutorError),
     (TransactionPreValidationError, TransactionPreValidationError, PyTransactionPreValidationError)

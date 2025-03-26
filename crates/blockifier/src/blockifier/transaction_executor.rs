@@ -1,4 +1,4 @@
-use std::panic::{self, catch_unwind, AssertUnwindSafe};
+use std::panic::{self, AssertUnwindSafe, catch_unwind};
 use std::sync::{Arc, Mutex};
 
 use itertools::FoldWhile::{Continue, Done};
@@ -14,7 +14,7 @@ use crate::context::BlockContext;
 use crate::state::cached_state::{CachedState, CommitmentStateDiff, StateMaps, TransactionalState};
 use crate::state::errors::StateError;
 use crate::state::state_api::{StateReader, StateResult};
-use crate::state::stateful_compression::{allocate_aliases_in_storage, compress, CompressionError};
+use crate::state::stateful_compression::{CompressionError, allocate_aliases_in_storage, compress};
 use crate::transaction::errors::TransactionExecutionError;
 use crate::transaction::objects::TransactionExecutionInfo;
 use crate::transaction::transaction_execution::Transaction;

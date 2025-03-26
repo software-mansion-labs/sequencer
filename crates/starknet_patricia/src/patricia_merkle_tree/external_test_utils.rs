@@ -4,7 +4,7 @@ use ethnum::U256;
 use rand::Rng;
 use serde_json::json;
 use starknet_patricia_storage::map_storage::MapStorage;
-use starknet_patricia_storage::storage_trait::{create_db_key, DbKey, DbValue};
+use starknet_patricia_storage::storage_trait::{DbKey, DbValue, create_db_key};
 use starknet_types_core::felt::Felt;
 
 use super::filled_tree::node_serde::PatriciaPrefix;

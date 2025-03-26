@@ -1,8 +1,5 @@
 use crate::test_utils::cairo_runner::{
-    run_cairo_0_entry_point,
-    Cairo0EntryPointRunnerResult,
-    EndpointArg,
-    ImplicitArg,
+    Cairo0EntryPointRunnerResult, EndpointArg, ImplicitArg, run_cairo_0_entry_point,
 };
 
 pub fn run_cairo_function_and_check_result(

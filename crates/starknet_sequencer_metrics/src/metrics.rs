@@ -4,16 +4,10 @@ use std::sync::OnceLock;
 
 use indexmap::IndexMap;
 use metrics::{
-    counter,
-    describe_counter,
-    describe_gauge,
-    describe_histogram,
-    gauge,
-    histogram,
-    IntoF64,
+    IntoF64, counter, describe_counter, describe_gauge, describe_histogram, gauge, histogram,
 };
 use num_traits::Num;
-use regex::{escape, Regex};
+use regex::{Regex, escape};
 
 #[cfg(test)]
 #[path = "metrics_test.rs"]
@@ -34,7 +28,7 @@ pub enum MetricScope {
     Mempool,
     MempoolP2p,
     StateSync,
-    PapyrusSync,
+    ApolloCentralSync,
 }
 
 pub struct MetricCounter {

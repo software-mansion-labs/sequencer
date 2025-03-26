@@ -3,11 +3,11 @@
 #![cfg_attr(coverage_nightly, feature(coverage_attribute))]
 
 #[cfg(feature = "rpc")]
-use papyrus_config::dumping::SerializeConfig;
+use apollo_config::dumping::SerializeConfig;
 #[cfg(feature = "rpc")]
 use papyrus_node::config::pointers::{CONFIG_NON_POINTERS_WHITELIST, CONFIG_POINTERS};
 #[cfg(feature = "rpc")]
-use papyrus_node::config::{NodeConfig, DEFAULT_CONFIG_PATH};
+use papyrus_node::config::{DEFAULT_CONFIG_PATH, NodeConfig};
 
 /// Updates the default config file by:
 /// cargo run --bin papyrus_dump_config -q

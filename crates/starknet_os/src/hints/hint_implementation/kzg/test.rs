@@ -8,11 +8,8 @@ use rstest::rstest;
 use starknet_types_core::felt::Felt;
 
 use crate::hints::hint_implementation::kzg::utils::{
-    bit_reversal,
-    polynomial_coefficients_to_blob,
-    serialize_blob,
+    FIELD_ELEMENTS_PER_BLOB, bit_reversal, polynomial_coefficients_to_blob, serialize_blob,
     split_commitment,
-    FIELD_ELEMENTS_PER_BLOB,
 };
 
 static BLOB_SUBGROUP_GENERATOR: LazyLock<BigUint> = LazyLock::new(|| {

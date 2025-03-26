@@ -4,11 +4,8 @@ use std::path::Path;
 use blockifier_reexecution::state_reader::offline_state_reader::OfflineConsecutiveStateReaders;
 use blockifier_reexecution::state_reader::test_state_reader::ConsecutiveTestStateReaders;
 use blockifier_reexecution::state_reader::utils::{
-    get_block_numbers_for_reexecution,
-    guess_chain_id_from_node_url,
-    reexecute_and_verify_correctness,
-    write_block_reexecution_data_to_file,
-    FULL_RESOURCES_DIR,
+    FULL_RESOURCES_DIR, get_block_numbers_for_reexecution, guess_chain_id_from_node_url,
+    reexecute_and_verify_correctness, write_block_reexecution_data_to_file,
 };
 use clap::{Args, Parser, Subcommand};
 use google_cloud_storage::client::{Client, ClientConfig};
@@ -306,7 +303,9 @@ async fn main() {
                     .unwrap();
             }
 
-            println!("All blocks uploaded successfully to https://console.cloud.google.com/storage/browser/{BUCKET}/{files_prefix}.");
+            println!(
+                "All blocks uploaded successfully to https://console.cloud.google.com/storage/browser/{BUCKET}/{files_prefix}."
+            );
         }
 
         Command::DownloadFiles { block_numbers, directory_path } => {

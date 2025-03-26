@@ -3,12 +3,12 @@ use std::env;
 use std::fs::read_to_string;
 use std::sync::LazyLock;
 
+use apollo_rpc_execution::{ETH_FEE_CONTRACT_ADDRESS, STRK_FEE_CONTRACT_ADDRESS};
 use assert_matches::assert_matches;
 use blockifier::context::{ChainInfo, FeeTokenAddresses};
 use blockifier::state::cached_state::{CachedState, CommitmentStateDiff, StateMaps};
 use blockifier::state::state_api::StateReader;
 use indexmap::IndexMap;
-use papyrus_execution::{ETH_FEE_CONTRACT_ADDRESS, STRK_FEE_CONTRACT_ADDRESS};
 use pretty_assertions::assert_eq;
 use serde::{Deserialize, Serialize};
 use starknet_api::block::BlockNumber;
@@ -20,9 +20,7 @@ use starknet_types_core::felt::Felt;
 use crate::assert_eq_state_diff;
 use crate::state_reader::errors::{ReexecutionError, ReexecutionResult};
 use crate::state_reader::offline_state_reader::{
-    OfflineConsecutiveStateReaders,
-    SerializableDataPrevBlock,
-    SerializableOfflineReexecutionData,
+    OfflineConsecutiveStateReaders, SerializableDataPrevBlock, SerializableOfflineReexecutionData,
 };
 use crate::state_reader::reexecution_state_reader::ConsecutiveReexecutionStateReaders;
 use crate::state_reader::test_state_reader::ConsecutiveTestStateReaders;

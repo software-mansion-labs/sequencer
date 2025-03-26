@@ -1,8 +1,8 @@
 #![allow(dead_code)]
 use std::collections::HashMap;
 
-use cairo_lang_starknet_classes::casm_contract_class::{CasmContractClass, CasmContractEntryPoint};
 use cairo_lang_starknet_classes::NestedIntList;
+use cairo_lang_starknet_classes::casm_contract_class::{CasmContractClass, CasmContractEntryPoint};
 use cairo_vm::types::relocatable::{MaybeRelocatable, Relocatable};
 use cairo_vm::vm::vm_core::VirtualMachine;
 use starknet_api::core::ClassHash;
@@ -12,7 +12,7 @@ use starknet_types_core::hash::{Poseidon, StarkHash};
 
 use crate::hints::error::{OsHintError, OsHintResult};
 use crate::hints::vars::{CairoStruct, Const};
-use crate::vm_utils::{insert_values_to_fields, CairoSized, IdentifierGetter, LoadCairoObject};
+use crate::vm_utils::{CairoSized, IdentifierGetter, LoadCairoObject, insert_values_to_fields};
 
 #[cfg(test)]
 #[path = "utils_test.rs"]

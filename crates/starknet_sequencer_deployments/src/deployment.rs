@@ -7,8 +7,7 @@ use serde::Serialize;
 use starknet_api::core::ChainId;
 use starknet_monitoring_endpoint::config::MonitoringEndpointConfig;
 use starknet_sequencer_node::config::config_utils::{
-    get_deployment_from_config_path,
-    PresetConfig,
+    PresetConfig, get_deployment_from_config_path,
 };
 
 use crate::service::{DeploymentName, Service};

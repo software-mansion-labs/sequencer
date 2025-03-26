@@ -1,8 +1,8 @@
 use async_trait::async_trait;
-use serde::de::DeserializeOwned;
 use serde::Serialize;
+use serde::de::DeserializeOwned;
 use starknet_infra_utils::type_name::short_type_name;
-use tokio::sync::mpsc::{channel, Sender};
+use tokio::sync::mpsc::{Sender, channel};
 use tracing::warn;
 
 use crate::component_client::ClientResult;

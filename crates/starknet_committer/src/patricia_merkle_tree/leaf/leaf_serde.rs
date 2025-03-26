@@ -11,7 +11,7 @@ use starknet_types_core::felt::Felt;
 
 use crate::block_committer::input::StarknetStorageValue;
 use crate::patricia_merkle_tree::leaf::leaf_impl::ContractState;
-use crate::patricia_merkle_tree::types::{fixed_hex_string_no_prefix, CompiledClassHash};
+use crate::patricia_merkle_tree::types::{CompiledClassHash, fixed_hex_string_no_prefix};
 
 #[derive(Clone, Debug)]
 pub enum CommitterLeafPrefix {

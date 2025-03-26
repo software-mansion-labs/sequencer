@@ -10,7 +10,7 @@ use crate::execution::entry_point::CallEntryPoint;
 use crate::execution::syscalls::syscall_tests::constants::REQUIRED_GAS_GET_CLASS_HASH_AT_TEST;
 use crate::retdata;
 use crate::test_utils::initial_test_state::test_state;
-use crate::test_utils::{trivial_external_entry_point_new, BALANCE};
+use crate::test_utils::{BALANCE, trivial_external_entry_point_new};
 
 /// Tests the `get_class_hash_at` syscall, ensuring that:
 /// 1. `accessed_contract_addresses` contains `address` for a valid entry.

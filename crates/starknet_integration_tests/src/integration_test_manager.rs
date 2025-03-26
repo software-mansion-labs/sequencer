@@ -5,17 +5,16 @@ use std::path::PathBuf;
 use std::time::Duration;
 
 use alloy::node_bindings::AnvilInstance;
+use apollo_network::network_manager::test_utils::create_connected_network_configs;
+use apollo_storage::StorageConfig;
 use blockifier::context::ChainInfo;
-use futures::future::join_all;
 use futures::TryFutureExt;
+use futures::future::join_all;
 use mempool_test_utils::starknet_api_test_utils::{AccountId, MultiAccountTransactionGenerator};
 use papyrus_base_layer::test_utils::{
-    ethereum_base_layer_config_for_anvil,
+    StarknetL1Contract, ethereum_base_layer_config_for_anvil,
     spawn_anvil_and_deploy_starknet_l1_contract,
-    StarknetL1Contract,
 };
-use papyrus_network::network_manager::test_utils::create_connected_network_configs;
-use papyrus_storage::StorageConfig;
 use starknet_api::block::BlockNumber;
 use starknet_api::core::{ChainId, Nonce};
 use starknet_api::execution_resources::GasAmount;
@@ -29,11 +28,10 @@ use starknet_infra_utils::tracing::{CustomLogger, TraceLevel};
 use starknet_monitoring_endpoint::config::MonitoringEndpointConfig;
 use starknet_monitoring_endpoint::test_utils::MonitoringClient;
 use starknet_sequencer_node::config::component_config::ComponentConfig;
-use starknet_sequencer_node::config::config_utils::{dump_json_data, DeploymentBaseAppConfig};
+use starknet_sequencer_node::config::config_utils::{DeploymentBaseAppConfig, dump_json_data};
 use starknet_sequencer_node::config::definitions::ConfigPointersMap;
 use starknet_sequencer_node::config::node_config::{
-    SequencerNodeConfig,
-    CONFIG_NON_POINTERS_WHITELIST,
+    CONFIG_NON_POINTERS_WHITELIST, SequencerNodeConfig,
 };
 use starknet_sequencer_node::test_utils::node_runner::{get_node_executable_path, spawn_run_node};
 use tempfile::TempDir;
@@ -43,33 +41,20 @@ use tracing::info;
 
 use crate::executable_setup::{ExecutableSetup, NodeExecutionId};
 use crate::monitoring_utils::{
-    await_batcher_block,
-    await_block,
-    await_sync_block,
-    await_txs_accepted,
-    sequencer_num_accepted_txs,
-    verify_txs_accepted,
+    await_batcher_block, await_block, await_sync_block, await_txs_accepted,
+    sequencer_num_accepted_txs, verify_txs_accepted,
 };
 use crate::node_component_configs::{
-    create_consolidated_sequencer_configs,
-    create_nodes_deployment_units_configs,
+    create_consolidated_sequencer_configs, create_nodes_deployment_units_configs,
 };
 use crate::sequencer_simulator_utils::SequencerSimulator;
-use crate::storage::{get_integration_test_storage, CustomPaths};
+use crate::storage::{CustomPaths, get_integration_test_storage};
 use crate::utils::{
-    create_consensus_manager_configs_from_network_configs,
-    create_integration_test_tx_generator,
-    create_mempool_p2p_configs,
-    create_node_config,
-    create_state_sync_configs,
-    send_consensus_txs,
-    send_message_to_l2_and_calculate_tx_hash,
-    set_validator_id,
-    spawn_local_eth_to_strk_oracle,
+    BootstrapTxs, ConsensusTxs, TestScenario,
+    create_consensus_manager_configs_from_network_configs, create_integration_test_tx_generator,
+    create_mempool_p2p_configs, create_node_config, create_state_sync_configs, send_consensus_txs,
+    send_message_to_l2_and_calculate_tx_hash, set_validator_id, spawn_local_eth_to_strk_oracle,
     spawn_local_success_recorder,
-    BootstrapTxs,
-    ConsensusTxs,
-    TestScenario,
 };
 
 pub const DEFAULT_SENDER_ACCOUNT: AccountId = 0;

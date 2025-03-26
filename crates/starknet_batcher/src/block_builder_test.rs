@@ -3,8 +3,7 @@ use std::sync::Arc;
 
 use assert_matches::assert_matches;
 use blockifier::blockifier::transaction_executor::{
-    BlockExecutionSummary,
-    TransactionExecutorError,
+    BlockExecutionSummary, TransactionExecutorError,
 };
 use blockifier::bouncer::BouncerWeights;
 use blockifier::fee::fee_checks::FeeCheckError;
@@ -13,29 +12,23 @@ use blockifier::state::errors::StateError;
 use blockifier::transaction::objects::{RevertError, TransactionExecutionInfo};
 use blockifier::transaction::transaction_execution::Transaction as BlockifierTransaction;
 use indexmap::{IndexMap, IndexSet};
-use mockall::predicate::eq;
 use mockall::Sequence;
+use mockall::predicate::eq;
 use pretty_assertions::assert_eq;
 use rstest::rstest;
 use starknet_api::consensus_transaction::InternalConsensusTransaction;
 use starknet_api::execution_resources::{GasAmount, GasVector};
 use starknet_api::test_utils::CHAIN_ID_FOR_TESTS;
-use starknet_api::transaction::fields::Fee;
 use starknet_api::transaction::TransactionHash;
+use starknet_api::transaction::fields::Fee;
 use starknet_api::tx_hash;
-use starknet_class_manager_types::transaction_converter::TransactionConverter;
 use starknet_class_manager_types::MockClassManagerClient;
+use starknet_class_manager_types::transaction_converter::TransactionConverter;
 use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
 
 use crate::block_builder::{
-    BlockBuilder,
-    BlockBuilderError,
-    BlockBuilderExecutionParams,
-    BlockBuilderResult,
-    BlockBuilderTrait,
-    BlockExecutionArtifacts,
-    BlockTransactionExecutionData,
-    FailOnErrorCause,
+    BlockBuilder, BlockBuilderError, BlockBuilderExecutionParams, BlockBuilderResult,
+    BlockBuilderTrait, BlockExecutionArtifacts, BlockTransactionExecutionData, FailOnErrorCause,
 };
 use crate::test_utils::{test_l1_handler_txs, test_txs};
 use crate::transaction_executor::MockTransactionExecutorTrait;

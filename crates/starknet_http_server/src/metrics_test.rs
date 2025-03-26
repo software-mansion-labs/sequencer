@@ -10,9 +10,7 @@ use starknet_sequencer_infra::component_client::ClientError;
 
 use crate::config::HttpServerConfig;
 use crate::metrics::{
-    ADDED_TRANSACTIONS_FAILURE,
-    ADDED_TRANSACTIONS_SUCCESS,
-    ADDED_TRANSACTIONS_TOTAL,
+    ADDED_TRANSACTIONS_FAILURE, ADDED_TRANSACTIONS_SUCCESS, ADDED_TRANSACTIONS_TOTAL,
 };
 use crate::test_utils::http_client_server_setup;
 

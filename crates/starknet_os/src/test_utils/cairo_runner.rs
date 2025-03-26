@@ -15,10 +15,7 @@ use starknet_types_core::felt::Felt;
 
 use crate::hint_processor::snos_hint_processor::SnosHintProcessor;
 use crate::test_utils::errors::{
-    Cairo0EntryPointRunnerError,
-    ExplicitArgError,
-    ImplicitArgError,
-    LoadReturnValueError,
+    Cairo0EntryPointRunnerError, ExplicitArgError, ImplicitArgError, LoadReturnValueError,
 };
 
 pub type Cairo0EntryPointRunnerResult<T> = Result<T, Cairo0EntryPointRunnerError>;

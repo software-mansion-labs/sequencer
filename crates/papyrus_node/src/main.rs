@@ -1,8 +1,8 @@
 use std::env::args;
 
-use papyrus_config::ConfigError;
+use apollo_config::ConfigError;
 use papyrus_node::config::NodeConfig;
-use papyrus_node::run::{run, PapyrusResources, PapyrusTaskHandles};
+use papyrus_node::run::{PapyrusResources, PapyrusTaskHandles, run};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {

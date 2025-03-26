@@ -1,8 +1,8 @@
+use apollo_rpc::CompiledContractClass;
 use blockifier::blockifier::block::validated_gas_prices;
 use blockifier::execution::contract_class::RunnableCompiledClass;
 use blockifier::state::state_api::StateReader;
 use cairo_lang_starknet_classes::casm_contract_class::CasmContractClass;
-use papyrus_rpc::CompiledContractClass;
 use serde::Serialize;
 use serde_json::json;
 use starknet_api::block::{BlockInfo, BlockNumber, GasPricePerToken};
@@ -11,15 +11,8 @@ use starknet_api::{class_hash, contract_address, felt, nonce};
 
 use crate::config::RpcStateReaderConfig;
 use crate::rpc_objects::{
-    BlockHeader,
-    BlockId,
-    GetBlockWithTxHashesParams,
-    GetClassHashAtParams,
-    GetCompiledClassParams,
-    GetNonceParams,
-    GetStorageAtParams,
-    RpcResponse,
-    RpcSuccessResponse,
+    BlockHeader, BlockId, GetBlockWithTxHashesParams, GetClassHashAtParams, GetCompiledClassParams,
+    GetNonceParams, GetStorageAtParams, RpcResponse, RpcSuccessResponse,
 };
 use crate::rpc_state_reader::RpcStateReader;
 use crate::state_reader::MempoolStateReader;
