@@ -10,6 +10,8 @@ use starknet_l1_gas_price_types::{L1GasPriceProviderResult, PriceInfo};
 use starknet_sequencer_infra::component_definitions::ComponentStarter;
 use validator::Validate;
 
+const FAKE_GAS_PRICE_VALUE: u128 = 10000;
+
 #[cfg(test)]
 #[path = "l1_gas_price_provider_test.rs"]
 pub mod l1_gas_price_provider_test;
@@ -22,6 +24,7 @@ pub struct L1GasPriceProviderConfig {
     // Ethereum.
     pub lag_margin_seconds: u64,
     pub storage_limit: usize,
+    pub use_fake: bool,
 }
 
 impl Default for L1GasPriceProviderConfig {
@@ -31,6 +34,7 @@ impl Default for L1GasPriceProviderConfig {
             number_of_blocks_for_mean: MEAN_NUMBER_OF_BLOCKS,
             lag_margin_seconds: 60,
             storage_limit: usize::try_from(10 * MEAN_NUMBER_OF_BLOCKS).unwrap(),
+            use_fake: false,
         }
     }
 }
@@ -55,6 +59,12 @@ impl SerializeConfig for L1GasPriceProviderConfig {
                 "storage_limit",
                 &self.storage_limit,
                 "Maximum number of L1 blocks to keep cached",
+                ParamPrivacyInput::Public,
+            ),
+            ser_param(
+                "use_fake",
+                &self.use_fake,
+                "Use a fake gas price (a const value) for testing",
                 ParamPrivacyInput::Public,
             ),
         ])
@@ -122,6 +132,12 @@ impl L1GasPriceProvider {
     }
 
     pub fn get_price_info(&self, timestamp: BlockTimestamp) -> L1GasPriceProviderResult<PriceInfo> {
+        if self.config.use_fake {
+            return Ok(PriceInfo {
+                base_fee_per_gas: FAKE_GAS_PRICE_VALUE,
+                blob_fee: FAKE_GAS_PRICE_VALUE,
+            });
+        }
         // This index is for the last block in the mean (inclusive).
         let index_last_timestamp_rev =
             self.price_samples_by_block.iter().rev().position(|data| {
@@ -163,3 +179,33 @@ impl L1GasPriceProvider {
 }
 
 impl ComponentStarter for L1GasPriceProvider {}
+
+// pub struct FakeL1GasPriceProvider{
+//     const_value: u128,
+// }
+// impl FakeL1GasPriceProvider{
+//     pub fn new() -> Self {
+//         Self { const_value: FAKE_GAS_PRICE_VALUE }
+//     }
+// }
+
+// #[async_trait]
+// impl L1GasPriceProviderClient for FakeL1GasPriceProvider {
+//     async fn add_price_info(
+//         &self,
+//         _height: L1BlockNumber,
+//         _sample: PriceSample,
+//     ) -> L1GasPriceProviderClientResult<()> {
+//         Ok(())
+//     }
+
+//     async fn get_price_info(
+//         &self,
+//         _timestamp: BlockTimestamp,
+//     ) -> L1GasPriceProviderClientResult<PriceInfo> {
+//         Ok(PriceInfo {
+//             base_fee_per_gas: self.const_value,
+//             blob_fee: self.const_value,
+//         })
+//     }
+// }

@@ -103,6 +103,7 @@ pub async fn create_node_components(
                 batcher_client,
                 state_sync_client,
                 class_manager_client,
+                clients.get_l1_gas_price_shared_client().unwrap(),
             ))
         }
         ActiveComponentExecutionMode::Disabled => None,
