@@ -49,7 +49,7 @@ def main():
     for svc in services:
         SequencerNode(
             scope=app,
-            name=f'sequencer-{svc["name"].lower()}',
+            name=helpers.sanitize_name(f'sequencer-{svc["name"]}'),
             namespace=args.namespace,
             service_topology=topology.ServiceTopology(
                 config=config.SequencerConfig(

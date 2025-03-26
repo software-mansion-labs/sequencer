@@ -37,7 +37,6 @@ class ServiceApp(Construct):
         self.service_topology = service_topology
         self.external_secret = external_secret
         self.node_config = service_topology.config.get_config()
-
         self.config_map = k8s.KubeConfigMap(
             self,
             "configmap",
